@@ -168,46 +168,65 @@ def render_and_mask(record: Record, tokenizer, max_length: int) -> Dict[str, Lis
     plus the generation-prompt marker) with label -100, keeping real labels only on the
     assistant's response tokens -- Design Doc Section 5's assistant-only loss masking.
 
-    Works by tokenizing the prompt alone (with `add_generation_prompt=True`) to find its
-    length, then tokenizing the full conversation and masking that prefix -- this is the
-    manual fallback Design Doc Section 5 names explicitly ("if we don't end up using
-    TRL, we replicate it by hand -- masking every token through the end of each user
-    turn"), used here so training doesn't hard-depend on any one TRL version's API for
-    completion-only loss. `tokenizer` only needs to implement
-    `apply_chat_template(messages, tokenize=bool, add_generation_prompt=bool)` --
-    satisfied by a real HF tokenizer, and by the FakeTokenizer test double in
+    IMPORTANT: this does NOT tokenize the prompt and the full conversation as two
+    separate calls and compare token-ID prefixes -- an earlier version of this function
+    did exactly that, and it broke on a real run (Qwen2.5-1.5B-Instruct on Colab): BPE
+    tokenizers are not guaranteed to tokenize a prefix of a string the same way whether
+    or not more text follows it (a token near the boundary can merge differently), so
+    `tokenize(prompt)` is not reliably a prefix of `tokenize(prompt + completion)` at
+    the TOKEN level even though it obviously is at the TEXT level. The fix: tokenize
+    the full conversation exactly ONCE, and use the tokenizer's character
+    offset-mapping (`return_offsets_mapping=True`, needs a fast/Rust tokenizer -- true
+    for Qwen2.5's) to find which tokens fall before vs. after the prompt/assistant
+    text boundary, rather than re-tokenizing the prompt separately and hoping the IDs
+    line up.
+
+    `tokenizer` needs `apply_chat_template(messages, tokenize=bool,
+    add_generation_prompt=bool)` (returning a string when tokenize=False) plus
+    `__call__(text, add_special_tokens=False, return_offsets_mapping=True)` returning a
+    dict with `input_ids` and `offset_mapping` -- satisfied by a real HF fast
+    tokenizer, and by the FakeTokenizer test double in
     finetuning/tests/test_loss_masking.py.
     """
     messages = record["messages"]
     if len(messages) < 2:
         raise ValueError(f"expected at least a user+assistant turn, got {messages!r}")
 
-    prompt_ids = tokenizer.apply_chat_template(
-        messages[:-1], tokenize=True, add_generation_prompt=True
-    )
-    full_ids = tokenizer.apply_chat_template(
-        messages, tokenize=True, add_generation_prompt=False
+    full_text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=False)
+    prompt_text = tokenizer.apply_chat_template(
+        messages[:-1], tokenize=False, add_generation_prompt=True
     )
 
-    if list(full_ids[: len(prompt_ids)]) != list(prompt_ids):
+    if not full_text.startswith(prompt_text):
         raise ValueError(
-            "chat template did not produce a stable prompt prefix -- cannot compute "
-            "an assistant-only loss mask safely with the manual fallback. Consider "
-            "using TRL's built-in completion-only-loss support instead for this "
-            "tokenizer/template combination."
+            "the prompt-only chat-template rendering is not a text prefix of the "
+            "full-conversation rendering -- cannot locate the assistant-only loss "
+            "mask boundary. This would mean the chat template does something "
+            "content-dependent beyond straightforward concatenation of turns "
+            "(unexpected for Qwen2.5-Instruct's template; investigate before training)."
         )
+    prompt_char_len = len(prompt_text)
 
-    labels = list(full_ids)
-    for i in range(min(len(prompt_ids), len(labels))):
-        labels[i] = -100
+    encoded = tokenizer(full_text, add_special_tokens=False, return_offsets_mapping=True)
+    input_ids = list(encoded["input_ids"])
+    offsets = list(encoded["offset_mapping"])
 
-    if len(full_ids) > max_length:
-        full_ids = list(full_ids[:max_length])
+    labels = list(input_ids)
+    for i, (start, _end) in enumerate(offsets):
+        # Mask any token whose span starts before the assistant's response begins.
+        # A token straddling the boundary (rare -- would need a BPE merge across a
+        # newline/special-token, which Qwen2.5's template avoids by construction) is
+        # conservatively masked too, at the cost of at most one real label token.
+        if start < prompt_char_len:
+            labels[i] = -100
+
+    if len(input_ids) > max_length:
+        input_ids = input_ids[:max_length]
         labels = labels[:max_length]
 
     return {
-        "input_ids": list(full_ids),
-        "attention_mask": [1] * len(full_ids),
+        "input_ids": input_ids,
+        "attention_mask": [1] * len(input_ids),
         "labels": labels,
     }
 

@@ -125,16 +125,40 @@ evidence of what was actually run.
 
 ## Notes / gotchas
 
-- **TRL vs. the manual masking fallback.** `finetuning/train.py` currently uses the
-  manual assistant-only-loss-masking path (`finetuning/prepare_data.py`'s
-  `render_and_mask`) rather than TRL's `SFTTrainer` completion-only-loss support, so
-  it has no dependency on a specific TRL version's API surface. If you switch to
-  `SFTTrainer` for convenience, keep the loss-masking behavior equivalent (verify
-  with `finetuning/tests/test_loss_masking.py`'s logic against the real tokenizer)
-  and note the change here.
+- **TRL vs. the manual masking fallback.** `finetuning/train.py` uses the manual
+  assistant-only-loss-masking path (`finetuning/prepare_data.py`'s `render_and_mask`)
+  rather than TRL's `SFTTrainer` completion-only-loss support, so it has no dependency
+  on a specific TRL version's API surface. If you switch to `SFTTrainer` for
+  convenience, keep the loss-masking behavior equivalent (verify with
+  `finetuning/tests/test_loss_masking.py`'s logic against the real tokenizer) and note
+  the change here.
+
+  **This masking logic was fixed once already against a real Colab run** and is worth
+  understanding if you touch it: `render_and_mask` tokenizes the *full* conversation
+  exactly once and uses the tokenizer's character offset-mapping
+  (`return_offsets_mapping=True`) to find the prompt/assistant boundary. An earlier
+  version tokenized the prompt and the full conversation as two *separate* calls and
+  compared token-ID prefixes -- that broke on Qwen2.5-1.5B-Instruct with
+  `ValueError: chat template did not produce a stable prompt prefix`, because BPE
+  tokenizers don't guarantee a text prefix tokenizes to a token-ID prefix (a token
+  near the boundary can merge differently depending on what follows it). If you ever
+  see that class of error again after modifying this function, it's almost certainly
+  the same class of bug re-introduced -- tokenize once, use offsets, don't compare
+  two separate tokenizations.
+
 - **Sequence length.** `finetuning/train.py` prints a warning if the data's p99 token
   length exceeds `config.MAX_SEQ_LENGTH` (256 by default) -- raise it in
   `finetuning/config.py` if you see that warning rather than silently truncating.
 - **HF auth.** Qwen2.5-1.5B-Instruct is not gated as of this writing; if a future
   download fails with an auth error, set `HF_TOKEN` via `huggingface_hub.login()` or
   the `HF_TOKEN` Colab secret.
+- **Noisy but harmless startup warnings on Colab.** You may see `torchao` complaining
+  about an incompatible version (fix: `pip install --upgrade torchao`) and/or failing
+  to load `_C_cutlass_*.so` / `_C_mxfp8*.so` shared libraries, plus an "unauthenticated
+  requests to the HF Hub" notice, and a `torch_dtype` is deprecated" notice from
+  transformers. None of these are fatal: `torchao` is only needed for quantized-kernel
+  optimizations this LoRA/bf16 setup doesn't use, the HF Hub notice is just a rate-limit
+  reminder (set `HF_TOKEN` if you hit rate limits on repeated runs), and the
+  `torch_dtype` notice is a forward-compat deprecation warning (a future
+  `transformers` version may want `dtype=` instead of `torch_dtype=` in
+  `AutoModelForCausalLM.from_pretrained` -- harmless today).
