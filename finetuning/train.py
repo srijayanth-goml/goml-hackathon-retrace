@@ -77,6 +77,75 @@ def _pad_collate(features: List[dict], pad_token_id: int):
     return batch
 
 
+def _build_training_arguments(output_dir: Path, run_name: str, has_eval: bool, training_arguments_cls=None):
+    """Builds transformers.TrainingArguments defensively: introspects the INSTALLED
+    version's actual constructor signature and drops any of our desired kwargs it
+    doesn't accept (printing what was dropped) instead of hard-crashing.
+
+    finetuning/requirements.txt pins `transformers>=4.44` with NO upper bound on
+    purpose (see its comment), which means Colab always installs whatever is newest
+    at run time -- and that has already bitten this exact function once in practice:
+    a real Colab run hit `TypeError: TrainingArguments.__init__() got an unexpected
+    keyword argument 'warmup_ratio'` on a transformers release newer than this was
+    written against. Rather than chase every future rename one at a time, this
+    filters our desired kwargs down to whatever the installed version actually
+    accepts, so a dropped/renamed argument degrades training slightly (e.g. no
+    warmup) instead of blocking the run entirely. Anything dropped is printed loudly
+    so it doesn't go unnoticed.
+
+    `training_arguments_cls` is only a seam for testing (see
+    finetuning/tests/test_train_args_compat.py) -- production callers should omit it
+    and get the real transformers.TrainingArguments.
+    """
+    import inspect
+
+    if training_arguments_cls is None:
+        from transformers import TrainingArguments as training_arguments_cls
+
+    desired = dict(
+        output_dir=str(output_dir / "_trainer_state"),
+        num_train_epochs=ft_config.NUM_EPOCHS,
+        per_device_train_batch_size=ft_config.PER_DEVICE_BATCH_SIZE,
+        per_device_eval_batch_size=ft_config.PER_DEVICE_BATCH_SIZE,
+        gradient_accumulation_steps=ft_config.GRAD_ACCUMULATION_STEPS,
+        learning_rate=ft_config.LEARNING_RATE,
+        lr_scheduler_type=ft_config.LR_SCHEDULER_TYPE,
+        warmup_ratio=ft_config.WARMUP_RATIO,
+        bf16=ft_config.BF16,
+        logging_steps=ft_config.LOGGING_STEPS,
+        eval_strategy="steps" if has_eval else "no",
+        eval_steps=ft_config.EVAL_STEPS if has_eval else None,
+        save_strategy="no",
+        report_to=[],
+        seed=ft_config.SEED,
+        run_name=run_name,
+    )
+
+    accepted = set(inspect.signature(training_arguments_cls.__init__).parameters)
+    dropped = {k: v for k, v in desired.items() if k not in accepted}
+    filtered = {k: v for k, v in desired.items() if k in accepted}
+
+    # eval_strategy was itself a rename of the older evaluation_strategy -- if a very
+    # old transformers only knows the legacy name, fall back to it rather than
+    # silently losing eval entirely (unlikely given our >=4.44 floor, but cheap).
+    if "eval_strategy" in dropped and "evaluation_strategy" in accepted:
+        filtered["evaluation_strategy"] = desired["eval_strategy"]
+        del dropped["eval_strategy"]
+
+    if dropped:
+        print(
+            f"WARNING: the installed transformers version's TrainingArguments does "
+            f"not accept {sorted(dropped)} -- dropping {list(dropped)} and using its "
+            f"built-in defaults instead (e.g. no warmup, if warmup_ratio was "
+            f"dropped). finetuning/requirements.txt pins transformers with no upper "
+            f"bound, so a newer release than this code was tested against can do "
+            f"this -- see finetuning/colab_runbook.md's gotchas section. "
+            f"Dropped values were: {dropped}"
+        )
+
+    return training_arguments_cls(**filtered)
+
+
 def _train_one(
     train_records: List[dict],
     val_records: List[dict],
@@ -90,7 +159,7 @@ def _train_one(
     _require_heavy_deps()
     import torch
     from peft import get_peft_model
-    from transformers import AutoModelForCausalLM, AutoTokenizer, Trainer, TrainingArguments
+    from transformers import AutoModelForCausalLM, AutoTokenizer, Trainer  # TrainingArguments is imported lazily inside _build_training_arguments
 
     tokenizer = AutoTokenizer.from_pretrained(ft_config.MODEL_NAME)
     if tokenizer.pad_token is None:
@@ -116,24 +185,7 @@ def _train_one(
     train_ds = _build_hf_dataset(train_records, tokenizer, ft_config.MAX_SEQ_LENGTH)
     val_ds = _build_hf_dataset(val_records, tokenizer, ft_config.MAX_SEQ_LENGTH) if val_records else None
 
-    training_args = TrainingArguments(
-        output_dir=str(output_dir / "_trainer_state"),
-        num_train_epochs=ft_config.NUM_EPOCHS,
-        per_device_train_batch_size=ft_config.PER_DEVICE_BATCH_SIZE,
-        per_device_eval_batch_size=ft_config.PER_DEVICE_BATCH_SIZE,
-        gradient_accumulation_steps=ft_config.GRAD_ACCUMULATION_STEPS,
-        learning_rate=ft_config.LEARNING_RATE,
-        lr_scheduler_type=ft_config.LR_SCHEDULER_TYPE,
-        warmup_ratio=ft_config.WARMUP_RATIO,
-        bf16=ft_config.BF16,
-        logging_steps=ft_config.LOGGING_STEPS,
-        eval_strategy="steps" if val_ds is not None else "no",
-        eval_steps=ft_config.EVAL_STEPS if val_ds is not None else None,
-        save_strategy="no",
-        report_to=[],
-        seed=ft_config.SEED,
-        run_name=run_name,
-    )
+    training_args = _build_training_arguments(output_dir, run_name, has_eval=val_ds is not None)
 
     trainer = Trainer(
         model=model,
