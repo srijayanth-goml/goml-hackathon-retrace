@@ -23,8 +23,8 @@ Either way you need the whole repo, not just `finetuning/` -- training reuses
 dataset deterministically (see step 3).
 
 ```python
-!git clone <your-repo-url> ReTrace
-%cd ReTrace
+!git clone https://github.com/srijayanth-goml/goml-hackathon-retrace.git
+%cd goml-hackathon-retrace
 ```
 
 ## 2. Install dependencies

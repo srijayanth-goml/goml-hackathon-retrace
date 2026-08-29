@@ -10,7 +10,7 @@ from common.schema import COMPANY_ATTRIBUTES, PERSON_ATTRIBUTES  # re-exported f
 ROOT_DIR = Path(__file__).resolve().parent
 
 # --- Source data (read-only inputs) ---
-RAW_DATA_DIR = ROOT_DIR / "data"
+RAW_DATA_DIR = ROOT_DIR / "data"/"raw"
 RAW_CSV_PATH = RAW_DATA_DIR / "knowledge_challenging_500.csv"
 CONFUSABILITY_AUDIT_PATH = ROOT_DIR / "misc" / "confusability_audit.json"
 
