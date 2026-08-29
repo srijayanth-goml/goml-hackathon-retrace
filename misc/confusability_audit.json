@@ -1,0 +1,3565 @@
+{
+  "summary": {
+    "total_entities": 100,
+    "companies": 53,
+    "people": 47,
+    "industry_cluster_size_histogram": {
+      "1": 1,
+      "2": 6,
+      "3": 6,
+      "5": 3,
+      "7": 1
+    },
+    "role_cluster_size_histogram": {
+      "1": 5,
+      "3": 1,
+      "5": 1,
+      "6": 3,
+      "8": 2
+    },
+    "duplicate_ceo_values": {
+      "Isabel Ortiz": [
+        "Solara Grid",
+        "Helion Power"
+      ]
+    },
+    "duplicate_flagship_product_values": {
+      "Aria Platform 9": [
+        "Ashgrove Dynamics",
+        "Lumen Therapeutics",
+        "Silvergate Aerospace",
+        "Emberly Analytics"
+      ],
+      "PulseGrid 9": [
+        "Windrose Health",
+        "Brightwell Health"
+      ],
+      "Sentinel Core 4": [
+        "Clearvale Energy",
+        "Fernwood Health"
+      ],
+      "Zenith Array 4": [
+        "Driftwood Bio",
+        "Crescent Materials"
+      ],
+      "Ember Stack 9": [
+        "Brightwell Security",
+        "Clearvale Health"
+      ],
+      "Lattice Bridge 9": [
+        "Ashgrove Robotics",
+        "Northbridge Bio",
+        "Cobalt Energy"
+      ],
+      "Sentinel Core 8": [
+        "Lumen Aerospace",
+        "Silvergate Labs"
+      ],
+      "Orbit Suite 4": [
+        "Windrose Aerospace",
+        "Copperline Labs"
+      ]
+    },
+    "companies_isolated_on_every_axis_checked": [],
+    "companies_isolated_on_name_axes_only": [
+      "Helion Power"
+    ],
+    "people_isolated_on_every_axis_checked": []
+  },
+  "entities": {
+    "NeuroSync Diagnostics": {
+      "fact_group_id": "G001",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "NeuroCore Diagnostics",
+          "NeuroWave Diagnostics"
+        ],
+        "same_headquarters": [
+          "Clearvale Energy",
+          "Lumen Logistics",
+          "NeuroWave Diagnostics",
+          "Silvergate Labs"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "NeuroCore Diagnostics",
+          "NeuroWave Diagnostics"
+        ]
+      },
+      "total_distinct_neighbors": 5
+    },
+    "NeuroWave Diagnostics": {
+      "fact_group_id": "G002",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "NeuroCore Diagnostics",
+          "NeuroSync Diagnostics"
+        ],
+        "same_headquarters": [
+          "Clearvale Energy",
+          "Lumen Logistics",
+          "NeuroSync Diagnostics",
+          "Silvergate Labs"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "Clearvale Logistics",
+          "NeuroCore Diagnostics",
+          "NeuroSync Diagnostics"
+        ]
+      },
+      "total_distinct_neighbors": 6
+    },
+    "NeuroCore Diagnostics": {
+      "fact_group_id": "G003",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "NeuroSync Diagnostics",
+          "NeuroWave Diagnostics"
+        ],
+        "same_headquarters": [],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "NeuroSync Diagnostics",
+          "NeuroWave Diagnostics"
+        ]
+      },
+      "total_distinct_neighbors": 2
+    },
+    "AgroDrone Systems": {
+      "fact_group_id": "G004",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "AgriDrone Dynamics"
+        ],
+        "same_headquarters": [
+          "AgriDrone Dynamics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "AgriDrone Dynamics",
+          "Amber Systems",
+          "Brightwell Systems",
+          "Halcyon Systems",
+          "Stonebrook Systems",
+          "Vertex Systems",
+          "Windrose Systems"
+        ]
+      },
+      "total_distinct_neighbors": 7
+    },
+    "AgriDrone Dynamics": {
+      "fact_group_id": "G005",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "AgroDrone Systems"
+        ],
+        "same_headquarters": [
+          "AgroDrone Systems"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "AgroDrone Systems",
+          "AgroSat Analytics",
+          "Ashgrove Dynamics",
+          "Crescent Dynamics",
+          "Fernwood Dynamics"
+        ]
+      },
+      "total_distinct_neighbors": 5
+    },
+    "QuantumLock Security": {
+      "fact_group_id": "G006",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "QuantumGate Security"
+        ],
+        "same_headquarters": [
+          "QuantumGate Security"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "Crescent Security",
+          "Meridian Security",
+          "QuantumGate Security",
+          "Sable Security",
+          "Vertex Security"
+        ]
+      },
+      "total_distinct_neighbors": 5
+    },
+    "QuantumGate Security": {
+      "fact_group_id": "G007",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "QuantumLock Security"
+        ],
+        "same_headquarters": [
+          "QuantumLock Security"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "Brightwell Security",
+          "Clearvale Security",
+          "Crescent Security",
+          "Meridian Security",
+          "QuantumLock Security",
+          "Sable Security",
+          "Vertex Security"
+        ]
+      },
+      "total_distinct_neighbors": 7
+    },
+    "Solara Grid": {
+      "fact_group_id": "G008",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Logistics",
+          "Brightwell Systems",
+          "Helion Power",
+          "Northbridge Health"
+        ],
+        "same_headquarters": [],
+        "same_ceo_value": [
+          "Helion Power"
+        ],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "SolarGrid Africa"
+        ]
+      },
+      "total_distinct_neighbors": 5
+    },
+    "Helion Power": {
+      "fact_group_id": "G009",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Logistics",
+          "Brightwell Systems",
+          "Northbridge Health",
+          "Solara Grid"
+        ],
+        "same_headquarters": [],
+        "same_ceo_value": [
+          "Solara Grid"
+        ],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": []
+      },
+      "total_distinct_neighbors": 4
+    },
+    "Elena Marchetti": {
+      "fact_group_id": "G010",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [],
+        "same_education": [
+          "Davide Ferraro"
+        ],
+        "same_birth_city": [
+          "Davide Ferraro"
+        ],
+        "same_current_company": [
+          "Chiara Bellini",
+          "Davide Ferraro"
+        ],
+        "same_previous_company": [
+          "Aiko Kessler",
+          "Anya Novak",
+          "Elin Reyes",
+          "Ingrid Costa",
+          "Lukas Petrov",
+          "Noor Okonkwo",
+          "Sanjay Ivanov"
+        ],
+        "current_company_value": "VoltEdge Robotics",
+        "previous_company_value": "Bosch"
+      },
+      "total_distinct_neighbors": 9
+    },
+    "Davide Ferraro": {
+      "fact_group_id": "G011",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [],
+        "same_education": [
+          "Elena Marchetti"
+        ],
+        "same_birth_city": [
+          "Elena Marchetti"
+        ],
+        "same_current_company": [
+          "Chiara Bellini",
+          "Elena Marchetti"
+        ],
+        "same_previous_company": [],
+        "current_company_value": "VoltEdge Robotics",
+        "previous_company_value": "Magna"
+      },
+      "total_distinct_neighbors": 2
+    },
+    "Chiara Bellini": {
+      "fact_group_id": "G012",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [],
+        "same_education": [],
+        "same_birth_city": [],
+        "same_current_company": [
+          "Davide Ferraro",
+          "Elena Marchetti"
+        ],
+        "same_previous_company": [],
+        "current_company_value": "VoltEdge Robotics",
+        "previous_company_value": "Pirelli"
+      },
+      "total_distinct_neighbors": 2
+    },
+    "Femi Adeyemi": {
+      "fact_group_id": "G013",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [],
+        "same_education": [],
+        "same_birth_city": [
+          "Ngozi Okafor"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [],
+        "current_company_value": "SolarGrid Africa",
+        "previous_company_value": "Shell"
+      },
+      "total_distinct_neighbors": 1
+    },
+    "Ngozi Okafor": {
+      "fact_group_id": "G014",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [],
+        "same_education": [],
+        "same_birth_city": [
+          "Femi Adeyemi"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [],
+        "current_company_value": "AgroSat Analytics",
+        "previous_company_value": "Cargill"
+      },
+      "total_distinct_neighbors": 1
+    },
+    "Ashgrove Dynamics": {
+      "fact_group_id": "G015",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Meridian Genomics",
+          "Vertex Systems"
+        ],
+        "same_headquarters": [
+          "Brightwell Health",
+          "Brightwell Security",
+          "Fernwood Analytics",
+          "Stonebrook Robotics",
+          "Windrose Systems"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Emberly Analytics",
+          "Lumen Therapeutics",
+          "Silvergate Aerospace"
+        ],
+        "same_name_root_real_entity": [
+          "Ashgrove Robotics"
+        ],
+        "same_name_root_decoy_mention": [
+          "Ashgrove Aerospace"
+        ],
+        "fuzzy_name_match": [
+          "AgriDrone Dynamics",
+          "AgroSat Analytics",
+          "Ashgrove Aerospace",
+          "Ashgrove Robotics",
+          "Crescent Dynamics",
+          "Fernwood Dynamics"
+        ]
+      },
+      "total_distinct_neighbors": 16
+    },
+    "Windrose Health": {
+      "fact_group_id": "G016",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Silvergate Labs"
+        ],
+        "same_headquarters": [
+          "Crescent Analytics",
+          "Windrose Aerospace"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Brightwell Health"
+        ],
+        "same_name_root_real_entity": [
+          "Windrose Aerospace",
+          "Windrose Robotics",
+          "Windrose Systems"
+        ],
+        "same_name_root_decoy_mention": [
+          "Windrose Logistics"
+        ],
+        "fuzzy_name_match": [
+          "Brightwell Health",
+          "Clearvale Health",
+          "Sable Health",
+          "Stonebrook Health",
+          "Vertex Health",
+          "Windrose Aerospace",
+          "Windrose Logistics",
+          "Windrose Robotics",
+          "Windrose Systems"
+        ]
+      },
+      "total_distinct_neighbors": 11
+    },
+    "Vertex Materials": {
+      "fact_group_id": "G017",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Amber Systems",
+          "Clearvale Energy",
+          "Silvergate Aerospace",
+          "Vertex Logistics"
+        ],
+        "same_headquarters": [
+          "Windrose Robotics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Vertex Logistics",
+          "Vertex Systems"
+        ],
+        "same_name_root_decoy_mention": [
+          "Vertex Health",
+          "Vertex Security"
+        ],
+        "fuzzy_name_match": [
+          "Clearvale Materials",
+          "Copperline Materials",
+          "Crescent Materials",
+          "Vertex Health",
+          "Vertex Logistics",
+          "Vertex Security",
+          "Vertex Systems"
+        ]
+      },
+      "total_distinct_neighbors": 11
+    },
+    "Vertex Logistics": {
+      "fact_group_id": "G018",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Amber Systems",
+          "Clearvale Energy",
+          "Silvergate Aerospace",
+          "Vertex Materials"
+        ],
+        "same_headquarters": [
+          "Crescent Energy",
+          "Emberly Networks",
+          "Halcyon Systems"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Vertex Materials",
+          "Vertex Systems"
+        ],
+        "same_name_root_decoy_mention": [
+          "Vertex Health",
+          "Vertex Security"
+        ],
+        "fuzzy_name_match": [
+          "Brightwell Logistics",
+          "Clearvale Logistics",
+          "Cobalt Logistics",
+          "Crescent Logistics",
+          "Driftwood Logistics",
+          "Lumen Logistics",
+          "Silvergate Robotics",
+          "Vertex Health",
+          "Vertex Materials",
+          "Vertex Security",
+          "Vertex Systems",
+          "Windrose Logistics"
+        ]
+      },
+      "total_distinct_neighbors": 18
+    },
+    "Amber Systems": {
+      "fact_group_id": "G019",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Clearvale Energy",
+          "Silvergate Aerospace",
+          "Vertex Logistics",
+          "Vertex Materials"
+        ],
+        "same_headquarters": [
+          "Clearvale Health",
+          "Cobalt Energy",
+          "Crescent Therapeutics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [],
+        "same_name_root_decoy_mention": [
+          "Amber Genomics"
+        ],
+        "fuzzy_name_match": [
+          "AgroDrone Systems",
+          "Amber Genomics",
+          "Brightwell Systems",
+          "Halcyon Systems",
+          "Stonebrook Systems",
+          "Vertex Systems",
+          "Windrose Systems"
+        ]
+      },
+      "total_distinct_neighbors": 14
+    },
+    "Lumen Therapeutics": {
+      "fact_group_id": "G020",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Robotics",
+          "Windrose Aerospace"
+        ],
+        "same_headquarters": [
+          "Brightwell Robotics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Ashgrove Dynamics",
+          "Emberly Analytics",
+          "Silvergate Aerospace"
+        ],
+        "same_name_root_real_entity": [
+          "Lumen Aerospace",
+          "Lumen Logistics"
+        ],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "Crescent Therapeutics",
+          "Fernwood Therapeutics",
+          "Ironwood Therapeutics",
+          "Lumen Logistics",
+          "Meridian Therapeutics",
+          "Silvergate Therapeutics"
+        ]
+      },
+      "total_distinct_neighbors": 12
+    },
+    "Clearvale Energy": {
+      "fact_group_id": "G021",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Amber Systems",
+          "Silvergate Aerospace",
+          "Vertex Logistics",
+          "Vertex Materials"
+        ],
+        "same_headquarters": [
+          "Lumen Logistics",
+          "NeuroSync Diagnostics",
+          "NeuroWave Diagnostics",
+          "Silvergate Labs"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Fernwood Health"
+        ],
+        "same_name_root_real_entity": [
+          "Clearvale Health"
+        ],
+        "same_name_root_decoy_mention": [
+          "Clearvale Aerospace",
+          "Clearvale Logistics",
+          "Clearvale Materials",
+          "Clearvale Security"
+        ],
+        "fuzzy_name_match": [
+          "Clearvale Aerospace",
+          "Clearvale Health",
+          "Clearvale Logistics",
+          "Clearvale Materials",
+          "Clearvale Security",
+          "Cobalt Energy",
+          "Crescent Energy"
+        ]
+      },
+      "total_distinct_neighbors": 16
+    },
+    "Halcyon Systems": {
+      "fact_group_id": "G022",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Security",
+          "Cobalt Energy",
+          "Cobalt Networks",
+          "Crescent Materials",
+          "Driftwood Bio",
+          "Emberly Analytics"
+        ],
+        "same_headquarters": [
+          "Crescent Energy",
+          "Emberly Networks",
+          "Vertex Logistics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [],
+        "same_name_root_decoy_mention": [
+          "Halcyon Robotics"
+        ],
+        "fuzzy_name_match": [
+          "AgroDrone Systems",
+          "Amber Systems",
+          "Halcyon Robotics",
+          "Stonebrook Systems",
+          "Vertex Systems",
+          "Windrose Systems"
+        ]
+      },
+      "total_distinct_neighbors": 15
+    },
+    "Driftwood Bio": {
+      "fact_group_id": "G023",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Security",
+          "Cobalt Energy",
+          "Cobalt Networks",
+          "Crescent Materials",
+          "Emberly Analytics",
+          "Halcyon Systems"
+        ],
+        "same_headquarters": [
+          "Brightwell Systems",
+          "Stonebrook Labs"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Crescent Materials"
+        ],
+        "same_name_root_real_entity": [
+          "Driftwood Logistics"
+        ],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "Driftwood Logistics"
+        ]
+      },
+      "total_distinct_neighbors": 9
+    },
+    "Fernwood Health": {
+      "fact_group_id": "G024",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Emberly Networks",
+          "Windrose Robotics"
+        ],
+        "same_headquarters": [],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Clearvale Energy"
+        ],
+        "same_name_root_real_entity": [
+          "Fernwood Analytics"
+        ],
+        "same_name_root_decoy_mention": [
+          "Fernwood Dynamics",
+          "Fernwood Therapeutics"
+        ],
+        "fuzzy_name_match": [
+          "Brightwell Health",
+          "Clearvale Health",
+          "Fernwood Analytics",
+          "Fernwood Dynamics",
+          "Fernwood Therapeutics",
+          "Ironwood Therapeutics",
+          "Sable Health",
+          "Stonebrook Health",
+          "Vertex Health"
+        ]
+      },
+      "total_distinct_neighbors": 12
+    },
+    "Lumen Logistics": {
+      "fact_group_id": "G025",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Ashgrove Robotics",
+          "Copperline Networks",
+          "Fernwood Analytics",
+          "Stonebrook Robotics"
+        ],
+        "same_headquarters": [
+          "Clearvale Energy",
+          "NeuroSync Diagnostics",
+          "NeuroWave Diagnostics",
+          "Silvergate Labs"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Lumen Aerospace",
+          "Lumen Therapeutics"
+        ],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "Brightwell Logistics",
+          "Clearvale Logistics",
+          "Cobalt Logistics",
+          "Crescent Logistics",
+          "Driftwood Logistics",
+          "Lumen Aerospace",
+          "Lumen Therapeutics",
+          "Vertex Logistics",
+          "Windrose Logistics"
+        ]
+      },
+      "total_distinct_neighbors": 17
+    },
+    "Brightwell Health": {
+      "fact_group_id": "G026",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Crescent Therapeutics",
+          "Lumen Aerospace"
+        ],
+        "same_headquarters": [
+          "Ashgrove Dynamics",
+          "Brightwell Security",
+          "Fernwood Analytics",
+          "Stonebrook Robotics",
+          "Windrose Systems"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Windrose Health"
+        ],
+        "same_name_root_real_entity": [
+          "Brightwell Logistics",
+          "Brightwell Robotics",
+          "Brightwell Security",
+          "Brightwell Systems"
+        ],
+        "same_name_root_decoy_mention": [
+          "Brightwell Genomics"
+        ],
+        "fuzzy_name_match": [
+          "Brightwell Genomics",
+          "Brightwell Logistics",
+          "Brightwell Robotics",
+          "Brightwell Security",
+          "Brightwell Systems",
+          "Fernwood Health",
+          "Northbridge Health",
+          "Sable Health",
+          "Vertex Health",
+          "Windrose Health"
+        ]
+      },
+      "total_distinct_neighbors": 16
+    },
+    "Crescent Therapeutics": {
+      "fact_group_id": "G027",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Health",
+          "Lumen Aerospace"
+        ],
+        "same_headquarters": [
+          "Amber Systems",
+          "Clearvale Health",
+          "Cobalt Energy"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Crescent Analytics",
+          "Crescent Energy",
+          "Crescent Logistics",
+          "Crescent Materials"
+        ],
+        "same_name_root_decoy_mention": [
+          "Crescent Bio",
+          "Crescent Dynamics",
+          "Crescent Labs",
+          "Crescent Security"
+        ],
+        "fuzzy_name_match": [
+          "Crescent Analytics",
+          "Crescent Bio",
+          "Crescent Dynamics",
+          "Crescent Energy",
+          "Crescent Labs",
+          "Crescent Logistics",
+          "Crescent Materials",
+          "Crescent Security",
+          "Fernwood Therapeutics",
+          "Ironwood Therapeutics",
+          "Lumen Therapeutics",
+          "Meridian Therapeutics",
+          "Silvergate Therapeutics"
+        ]
+      },
+      "total_distinct_neighbors": 18
+    },
+    "Brightwell Systems": {
+      "fact_group_id": "G028",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Logistics",
+          "Helion Power",
+          "Northbridge Health",
+          "Solara Grid"
+        ],
+        "same_headquarters": [
+          "Driftwood Bio",
+          "Stonebrook Labs"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Brightwell Health",
+          "Brightwell Logistics",
+          "Brightwell Robotics",
+          "Brightwell Security"
+        ],
+        "same_name_root_decoy_mention": [
+          "Brightwell Genomics"
+        ],
+        "fuzzy_name_match": [
+          "AgroDrone Systems",
+          "Amber Systems",
+          "Brightwell Genomics",
+          "Brightwell Health",
+          "Brightwell Logistics",
+          "Brightwell Robotics",
+          "Brightwell Security",
+          "Vertex Systems",
+          "Windrose Systems"
+        ]
+      },
+      "total_distinct_neighbors": 14
+    },
+    "Silvergate Aerospace": {
+      "fact_group_id": "G029",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Amber Systems",
+          "Clearvale Energy",
+          "Vertex Logistics",
+          "Vertex Materials"
+        ],
+        "same_headquarters": [
+          "Ashgrove Robotics",
+          "Cobalt Networks",
+          "Driftwood Logistics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Ashgrove Dynamics",
+          "Emberly Analytics",
+          "Lumen Therapeutics"
+        ],
+        "same_name_root_real_entity": [
+          "Silvergate Labs"
+        ],
+        "same_name_root_decoy_mention": [
+          "Silvergate Bio",
+          "Silvergate Robotics",
+          "Silvergate Therapeutics"
+        ],
+        "fuzzy_name_match": [
+          "Ashgrove Aerospace",
+          "Clearvale Aerospace",
+          "Cobalt Aerospace",
+          "Emberly Aerospace",
+          "Lumen Aerospace",
+          "Silvergate Bio",
+          "Silvergate Labs",
+          "Silvergate Robotics",
+          "Silvergate Therapeutics",
+          "Windrose Aerospace"
+        ]
+      },
+      "total_distinct_neighbors": 20
+    },
+    "Crescent Logistics": {
+      "fact_group_id": "G030",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Northbridge Bio"
+        ],
+        "same_headquarters": [
+          "Meridian Genomics",
+          "Northbridge Genomics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Crescent Analytics",
+          "Crescent Energy",
+          "Crescent Materials",
+          "Crescent Therapeutics"
+        ],
+        "same_name_root_decoy_mention": [
+          "Crescent Bio",
+          "Crescent Dynamics",
+          "Crescent Labs",
+          "Crescent Security"
+        ],
+        "fuzzy_name_match": [
+          "Brightwell Logistics",
+          "Clearvale Logistics",
+          "Cobalt Logistics",
+          "Crescent Analytics",
+          "Crescent Bio",
+          "Crescent Dynamics",
+          "Crescent Energy",
+          "Crescent Labs",
+          "Crescent Materials",
+          "Crescent Security",
+          "Crescent Therapeutics",
+          "Driftwood Logistics",
+          "Lumen Logistics",
+          "Vertex Logistics",
+          "Windrose Logistics"
+        ]
+      },
+      "total_distinct_neighbors": 18
+    },
+    "Crescent Materials": {
+      "fact_group_id": "G031",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Security",
+          "Cobalt Energy",
+          "Cobalt Networks",
+          "Driftwood Bio",
+          "Emberly Analytics",
+          "Halcyon Systems"
+        ],
+        "same_headquarters": [
+          "Northbridge Bio"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Driftwood Bio"
+        ],
+        "same_name_root_real_entity": [
+          "Crescent Analytics",
+          "Crescent Energy",
+          "Crescent Logistics",
+          "Crescent Therapeutics"
+        ],
+        "same_name_root_decoy_mention": [
+          "Crescent Bio",
+          "Crescent Dynamics",
+          "Crescent Labs",
+          "Crescent Security"
+        ],
+        "fuzzy_name_match": [
+          "Clearvale Materials",
+          "Copperline Materials",
+          "Crescent Analytics",
+          "Crescent Bio",
+          "Crescent Dynamics",
+          "Crescent Energy",
+          "Crescent Labs",
+          "Crescent Logistics",
+          "Crescent Security",
+          "Crescent Therapeutics",
+          "Vertex Materials"
+        ]
+      },
+      "total_distinct_neighbors": 18
+    },
+    "Driftwood Logistics": {
+      "fact_group_id": "G032",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Clearvale Health",
+          "Crescent Analytics"
+        ],
+        "same_headquarters": [
+          "Ashgrove Robotics",
+          "Cobalt Networks",
+          "Silvergate Aerospace"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Driftwood Bio"
+        ],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "Brightwell Logistics",
+          "Clearvale Logistics",
+          "Cobalt Logistics",
+          "Crescent Logistics",
+          "Driftwood Bio",
+          "Lumen Logistics",
+          "Vertex Logistics",
+          "Windrose Logistics"
+        ]
+      },
+      "total_distinct_neighbors": 13
+    },
+    "Vertex Systems": {
+      "fact_group_id": "G033",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Ashgrove Dynamics",
+          "Meridian Genomics"
+        ],
+        "same_headquarters": [
+          "Copperline Labs",
+          "Lumen Aerospace",
+          "Northbridge Health"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Vertex Logistics",
+          "Vertex Materials"
+        ],
+        "same_name_root_decoy_mention": [
+          "Vertex Health",
+          "Vertex Security"
+        ],
+        "fuzzy_name_match": [
+          "AgroDrone Systems",
+          "Amber Systems",
+          "Brightwell Systems",
+          "Halcyon Systems",
+          "Stonebrook Systems",
+          "Vertex Health",
+          "Vertex Logistics",
+          "Vertex Materials",
+          "Vertex Security",
+          "Windrose Systems"
+        ]
+      },
+      "total_distinct_neighbors": 15
+    },
+    "Brightwell Security": {
+      "fact_group_id": "G034",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Cobalt Energy",
+          "Cobalt Networks",
+          "Crescent Materials",
+          "Driftwood Bio",
+          "Emberly Analytics",
+          "Halcyon Systems"
+        ],
+        "same_headquarters": [
+          "Ashgrove Dynamics",
+          "Brightwell Health",
+          "Fernwood Analytics",
+          "Stonebrook Robotics",
+          "Windrose Systems"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Clearvale Health"
+        ],
+        "same_name_root_real_entity": [
+          "Brightwell Health",
+          "Brightwell Logistics",
+          "Brightwell Robotics",
+          "Brightwell Systems"
+        ],
+        "same_name_root_decoy_mention": [
+          "Brightwell Genomics"
+        ],
+        "fuzzy_name_match": [
+          "Brightwell Genomics",
+          "Brightwell Health",
+          "Brightwell Logistics",
+          "Brightwell Robotics",
+          "Brightwell Systems",
+          "Clearvale Security",
+          "Crescent Security",
+          "Meridian Security",
+          "QuantumGate Security",
+          "Sable Security",
+          "Vertex Security"
+        ]
+      },
+      "total_distinct_neighbors": 22
+    },
+    "Clearvale Health": {
+      "fact_group_id": "G035",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Crescent Analytics",
+          "Driftwood Logistics"
+        ],
+        "same_headquarters": [
+          "Amber Systems",
+          "Cobalt Energy",
+          "Crescent Therapeutics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Brightwell Security"
+        ],
+        "same_name_root_real_entity": [
+          "Clearvale Energy"
+        ],
+        "same_name_root_decoy_mention": [
+          "Clearvale Aerospace",
+          "Clearvale Logistics",
+          "Clearvale Materials",
+          "Clearvale Security"
+        ],
+        "fuzzy_name_match": [
+          "Clearvale Aerospace",
+          "Clearvale Energy",
+          "Clearvale Logistics",
+          "Clearvale Materials",
+          "Clearvale Security",
+          "Fernwood Health",
+          "Sable Health",
+          "Vertex Health",
+          "Windrose Health"
+        ]
+      },
+      "total_distinct_neighbors": 15
+    },
+    "Ashgrove Robotics": {
+      "fact_group_id": "G036",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Copperline Networks",
+          "Fernwood Analytics",
+          "Lumen Logistics",
+          "Stonebrook Robotics"
+        ],
+        "same_headquarters": [
+          "Cobalt Networks",
+          "Driftwood Logistics",
+          "Silvergate Aerospace"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Cobalt Energy",
+          "Northbridge Bio"
+        ],
+        "same_name_root_real_entity": [
+          "Ashgrove Dynamics"
+        ],
+        "same_name_root_decoy_mention": [
+          "Ashgrove Aerospace"
+        ],
+        "fuzzy_name_match": [
+          "Ashgrove Aerospace",
+          "Ashgrove Dynamics",
+          "Brightwell Robotics",
+          "Halcyon Robotics",
+          "Meridian Robotics",
+          "Silvergate Robotics",
+          "Stonebrook Robotics",
+          "VoltEdge Robotics",
+          "Windrose Robotics"
+        ]
+      },
+      "total_distinct_neighbors": 17
+    },
+    "Windrose Robotics": {
+      "fact_group_id": "G037",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Emberly Networks",
+          "Fernwood Health"
+        ],
+        "same_headquarters": [
+          "Vertex Materials"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Windrose Aerospace",
+          "Windrose Health",
+          "Windrose Systems"
+        ],
+        "same_name_root_decoy_mention": [
+          "Windrose Logistics"
+        ],
+        "fuzzy_name_match": [
+          "Ashgrove Robotics",
+          "Brightwell Robotics",
+          "Halcyon Robotics",
+          "Meridian Robotics",
+          "Silvergate Robotics",
+          "Stonebrook Robotics",
+          "VoltEdge Robotics",
+          "Windrose Aerospace",
+          "Windrose Health",
+          "Windrose Logistics",
+          "Windrose Systems"
+        ]
+      },
+      "total_distinct_neighbors": 14
+    },
+    "Stonebrook Robotics": {
+      "fact_group_id": "G038",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Ashgrove Robotics",
+          "Copperline Networks",
+          "Fernwood Analytics",
+          "Lumen Logistics"
+        ],
+        "same_headquarters": [
+          "Ashgrove Dynamics",
+          "Brightwell Health",
+          "Brightwell Security",
+          "Fernwood Analytics",
+          "Windrose Systems"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Stonebrook Labs"
+        ],
+        "same_name_root_decoy_mention": [
+          "Stonebrook Energy",
+          "Stonebrook Genomics",
+          "Stonebrook Health",
+          "Stonebrook Systems"
+        ],
+        "fuzzy_name_match": [
+          "Ashgrove Robotics",
+          "Halcyon Robotics",
+          "Meridian Robotics",
+          "Silvergate Robotics",
+          "Stonebrook Energy",
+          "Stonebrook Genomics",
+          "Stonebrook Health",
+          "Stonebrook Labs",
+          "Stonebrook Systems",
+          "VoltEdge Robotics",
+          "Windrose Robotics"
+        ]
+      },
+      "total_distinct_neighbors": 18
+    },
+    "Brightwell Logistics": {
+      "fact_group_id": "G039",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Systems",
+          "Helion Power",
+          "Northbridge Health",
+          "Solara Grid"
+        ],
+        "same_headquarters": [
+          "Copperline Networks",
+          "Emberly Analytics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Brightwell Health",
+          "Brightwell Robotics",
+          "Brightwell Security",
+          "Brightwell Systems"
+        ],
+        "same_name_root_decoy_mention": [
+          "Brightwell Genomics"
+        ],
+        "fuzzy_name_match": [
+          "Brightwell Genomics",
+          "Brightwell Health",
+          "Brightwell Robotics",
+          "Brightwell Security",
+          "Brightwell Systems",
+          "Clearvale Logistics",
+          "Cobalt Logistics",
+          "Crescent Logistics",
+          "Driftwood Logistics",
+          "Lumen Logistics",
+          "Vertex Logistics",
+          "Windrose Logistics"
+        ]
+      },
+      "total_distinct_neighbors": 17
+    },
+    "Copperline Networks": {
+      "fact_group_id": "G040",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Ashgrove Robotics",
+          "Fernwood Analytics",
+          "Lumen Logistics",
+          "Stonebrook Robotics"
+        ],
+        "same_headquarters": [
+          "Brightwell Logistics",
+          "Emberly Analytics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Copperline Labs"
+        ],
+        "same_name_root_decoy_mention": [
+          "Copperline Bio",
+          "Copperline Materials"
+        ],
+        "fuzzy_name_match": [
+          "Cobalt Networks",
+          "Copperline Bio",
+          "Copperline Labs",
+          "Copperline Materials",
+          "Emberly Networks",
+          "Sable Networks"
+        ]
+      },
+      "total_distinct_neighbors": 12
+    },
+    "Emberly Networks": {
+      "fact_group_id": "G041",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Fernwood Health",
+          "Windrose Robotics"
+        ],
+        "same_headquarters": [
+          "Crescent Energy",
+          "Halcyon Systems",
+          "Vertex Logistics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Emberly Analytics"
+        ],
+        "same_name_root_decoy_mention": [
+          "Emberly Aerospace"
+        ],
+        "fuzzy_name_match": [
+          "Cobalt Networks",
+          "Copperline Networks",
+          "Emberly Aerospace",
+          "Emberly Analytics",
+          "Sable Networks"
+        ]
+      },
+      "total_distinct_neighbors": 10
+    },
+    "Cobalt Networks": {
+      "fact_group_id": "G042",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Security",
+          "Cobalt Energy",
+          "Crescent Materials",
+          "Driftwood Bio",
+          "Emberly Analytics",
+          "Halcyon Systems"
+        ],
+        "same_headquarters": [
+          "Ashgrove Robotics",
+          "Driftwood Logistics",
+          "Silvergate Aerospace"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Cobalt Energy"
+        ],
+        "same_name_root_decoy_mention": [
+          "Cobalt Aerospace",
+          "Cobalt Analytics",
+          "Cobalt Logistics"
+        ],
+        "fuzzy_name_match": [
+          "Cobalt Aerospace",
+          "Cobalt Analytics",
+          "Cobalt Energy",
+          "Cobalt Logistics",
+          "Copperline Networks",
+          "Emberly Networks",
+          "Sable Networks"
+        ]
+      },
+      "total_distinct_neighbors": 15
+    },
+    "Brightwell Robotics": {
+      "fact_group_id": "G043",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Lumen Therapeutics",
+          "Windrose Aerospace"
+        ],
+        "same_headquarters": [
+          "Lumen Therapeutics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Brightwell Health",
+          "Brightwell Logistics",
+          "Brightwell Security",
+          "Brightwell Systems"
+        ],
+        "same_name_root_decoy_mention": [
+          "Brightwell Genomics"
+        ],
+        "fuzzy_name_match": [
+          "Ashgrove Robotics",
+          "Brightwell Genomics",
+          "Brightwell Health",
+          "Brightwell Logistics",
+          "Brightwell Security",
+          "Brightwell Systems",
+          "Halcyon Robotics",
+          "Meridian Robotics",
+          "Silvergate Robotics",
+          "VoltEdge Robotics",
+          "Windrose Robotics"
+        ]
+      },
+      "total_distinct_neighbors": 13
+    },
+    "Fernwood Analytics": {
+      "fact_group_id": "G044",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Ashgrove Robotics",
+          "Copperline Networks",
+          "Lumen Logistics",
+          "Stonebrook Robotics"
+        ],
+        "same_headquarters": [
+          "Ashgrove Dynamics",
+          "Brightwell Health",
+          "Brightwell Security",
+          "Stonebrook Robotics",
+          "Windrose Systems"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Fernwood Health"
+        ],
+        "same_name_root_decoy_mention": [
+          "Fernwood Dynamics",
+          "Fernwood Therapeutics"
+        ],
+        "fuzzy_name_match": [
+          "AgroSat Analytics",
+          "Cobalt Analytics",
+          "Crescent Analytics",
+          "Emberly Analytics",
+          "Fernwood Dynamics",
+          "Fernwood Health",
+          "Fernwood Therapeutics",
+          "Ironwood Therapeutics"
+        ]
+      },
+      "total_distinct_neighbors": 16
+    },
+    "Lumen Aerospace": {
+      "fact_group_id": "G045",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Health",
+          "Crescent Therapeutics"
+        ],
+        "same_headquarters": [
+          "Copperline Labs",
+          "Northbridge Health",
+          "Vertex Systems"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Silvergate Labs"
+        ],
+        "same_name_root_real_entity": [
+          "Lumen Logistics",
+          "Lumen Therapeutics"
+        ],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "Ashgrove Aerospace",
+          "Clearvale Aerospace",
+          "Cobalt Aerospace",
+          "Emberly Aerospace",
+          "Lumen Logistics",
+          "Silvergate Aerospace",
+          "Windrose Aerospace"
+        ]
+      },
+      "total_distinct_neighbors": 14
+    },
+    "Stonebrook Labs": {
+      "fact_group_id": "G046",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Copperline Labs"
+        ],
+        "same_headquarters": [
+          "Brightwell Systems",
+          "Driftwood Bio"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Stonebrook Robotics"
+        ],
+        "same_name_root_decoy_mention": [
+          "Stonebrook Energy",
+          "Stonebrook Genomics",
+          "Stonebrook Health",
+          "Stonebrook Systems"
+        ],
+        "fuzzy_name_match": [
+          "Stonebrook Energy",
+          "Stonebrook Genomics",
+          "Stonebrook Health",
+          "Stonebrook Robotics",
+          "Stonebrook Systems"
+        ]
+      },
+      "total_distinct_neighbors": 8
+    },
+    "Northbridge Health": {
+      "fact_group_id": "G047",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Logistics",
+          "Brightwell Systems",
+          "Helion Power",
+          "Solara Grid"
+        ],
+        "same_headquarters": [
+          "Copperline Labs",
+          "Lumen Aerospace",
+          "Vertex Systems"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Northbridge Bio",
+          "Northbridge Genomics"
+        ],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "Brightwell Health",
+          "Northbridge Bio",
+          "Northbridge Genomics",
+          "Sable Health",
+          "Stonebrook Health",
+          "Vertex Health"
+        ]
+      },
+      "total_distinct_neighbors": 13
+    },
+    "Windrose Aerospace": {
+      "fact_group_id": "G048",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Robotics",
+          "Lumen Therapeutics"
+        ],
+        "same_headquarters": [
+          "Crescent Analytics",
+          "Windrose Health"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Copperline Labs"
+        ],
+        "same_name_root_real_entity": [
+          "Windrose Health",
+          "Windrose Robotics",
+          "Windrose Systems"
+        ],
+        "same_name_root_decoy_mention": [
+          "Windrose Logistics"
+        ],
+        "fuzzy_name_match": [
+          "Ashgrove Aerospace",
+          "Clearvale Aerospace",
+          "Cobalt Aerospace",
+          "Emberly Aerospace",
+          "Lumen Aerospace",
+          "Silvergate Aerospace",
+          "Windrose Health",
+          "Windrose Logistics",
+          "Windrose Robotics",
+          "Windrose Systems"
+        ]
+      },
+      "total_distinct_neighbors": 14
+    },
+    "Silvergate Labs": {
+      "fact_group_id": "G049",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Windrose Health"
+        ],
+        "same_headquarters": [
+          "Clearvale Energy",
+          "Lumen Logistics",
+          "NeuroSync Diagnostics",
+          "NeuroWave Diagnostics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Lumen Aerospace"
+        ],
+        "same_name_root_real_entity": [
+          "Silvergate Aerospace"
+        ],
+        "same_name_root_decoy_mention": [
+          "Silvergate Bio",
+          "Silvergate Robotics",
+          "Silvergate Therapeutics"
+        ],
+        "fuzzy_name_match": [
+          "Silvergate Aerospace",
+          "Silvergate Bio",
+          "Silvergate Robotics",
+          "Silvergate Therapeutics"
+        ]
+      },
+      "total_distinct_neighbors": 10
+    },
+    "Windrose Systems": {
+      "fact_group_id": "G050",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Northbridge Genomics"
+        ],
+        "same_headquarters": [
+          "Ashgrove Dynamics",
+          "Brightwell Health",
+          "Brightwell Security",
+          "Fernwood Analytics",
+          "Stonebrook Robotics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Windrose Aerospace",
+          "Windrose Health",
+          "Windrose Robotics"
+        ],
+        "same_name_root_decoy_mention": [
+          "Windrose Logistics"
+        ],
+        "fuzzy_name_match": [
+          "AgroDrone Systems",
+          "Amber Systems",
+          "Brightwell Systems",
+          "Halcyon Systems",
+          "Stonebrook Systems",
+          "Vertex Systems",
+          "Windrose Aerospace",
+          "Windrose Health",
+          "Windrose Logistics",
+          "Windrose Robotics"
+        ]
+      },
+      "total_distinct_neighbors": 16
+    },
+    "Northbridge Bio": {
+      "fact_group_id": "G051",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Crescent Logistics"
+        ],
+        "same_headquarters": [
+          "Crescent Materials"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Ashgrove Robotics",
+          "Cobalt Energy"
+        ],
+        "same_name_root_real_entity": [
+          "Northbridge Genomics",
+          "Northbridge Health"
+        ],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "Copperline Bio",
+          "Northbridge Genomics",
+          "Northbridge Health"
+        ]
+      },
+      "total_distinct_neighbors": 7
+    },
+    "Emberly Analytics": {
+      "fact_group_id": "G052",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Security",
+          "Cobalt Energy",
+          "Cobalt Networks",
+          "Crescent Materials",
+          "Driftwood Bio",
+          "Halcyon Systems"
+        ],
+        "same_headquarters": [
+          "Brightwell Logistics",
+          "Copperline Networks"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Ashgrove Dynamics",
+          "Lumen Therapeutics",
+          "Silvergate Aerospace"
+        ],
+        "same_name_root_real_entity": [
+          "Emberly Networks"
+        ],
+        "same_name_root_decoy_mention": [
+          "Emberly Aerospace"
+        ],
+        "fuzzy_name_match": [
+          "AgroSat Analytics",
+          "Amber Genomics",
+          "Cobalt Analytics",
+          "Crescent Analytics",
+          "Emberly Aerospace",
+          "Emberly Networks",
+          "Fernwood Analytics"
+        ]
+      },
+      "total_distinct_neighbors": 18
+    },
+    "Crescent Analytics": {
+      "fact_group_id": "G053",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Clearvale Health",
+          "Driftwood Logistics"
+        ],
+        "same_headquarters": [
+          "Windrose Aerospace",
+          "Windrose Health"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Crescent Energy",
+          "Crescent Logistics",
+          "Crescent Materials",
+          "Crescent Therapeutics"
+        ],
+        "same_name_root_decoy_mention": [
+          "Crescent Bio",
+          "Crescent Dynamics",
+          "Crescent Labs",
+          "Crescent Security"
+        ],
+        "fuzzy_name_match": [
+          "AgroSat Analytics",
+          "Cobalt Analytics",
+          "Crescent Bio",
+          "Crescent Dynamics",
+          "Crescent Energy",
+          "Crescent Labs",
+          "Crescent Logistics",
+          "Crescent Materials",
+          "Crescent Security",
+          "Crescent Therapeutics",
+          "Emberly Analytics",
+          "Fernwood Analytics"
+        ]
+      },
+      "total_distinct_neighbors": 16
+    },
+    "Crescent Energy": {
+      "fact_group_id": "G054",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [],
+        "same_headquarters": [
+          "Emberly Networks",
+          "Halcyon Systems",
+          "Vertex Logistics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Crescent Analytics",
+          "Crescent Logistics",
+          "Crescent Materials",
+          "Crescent Therapeutics"
+        ],
+        "same_name_root_decoy_mention": [
+          "Crescent Bio",
+          "Crescent Dynamics",
+          "Crescent Labs",
+          "Crescent Security"
+        ],
+        "fuzzy_name_match": [
+          "Clearvale Energy",
+          "Cobalt Energy",
+          "Crescent Analytics",
+          "Crescent Bio",
+          "Crescent Dynamics",
+          "Crescent Labs",
+          "Crescent Logistics",
+          "Crescent Materials",
+          "Crescent Security",
+          "Crescent Therapeutics",
+          "Ironwood Energy"
+        ]
+      },
+      "total_distinct_neighbors": 14
+    },
+    "Meridian Genomics": {
+      "fact_group_id": "G055",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Ashgrove Dynamics",
+          "Vertex Systems"
+        ],
+        "same_headquarters": [
+          "Crescent Logistics",
+          "Northbridge Genomics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [],
+        "same_name_root_decoy_mention": [
+          "Meridian Robotics",
+          "Meridian Security",
+          "Meridian Therapeutics"
+        ],
+        "fuzzy_name_match": [
+          "Amber Genomics",
+          "Brightwell Genomics",
+          "Meridian Robotics",
+          "Meridian Security",
+          "Meridian Therapeutics",
+          "Northbridge Genomics",
+          "Stonebrook Genomics"
+        ]
+      },
+      "total_distinct_neighbors": 10
+    },
+    "Cobalt Energy": {
+      "fact_group_id": "G056",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Brightwell Security",
+          "Cobalt Networks",
+          "Crescent Materials",
+          "Driftwood Bio",
+          "Emberly Analytics",
+          "Halcyon Systems"
+        ],
+        "same_headquarters": [
+          "Amber Systems",
+          "Clearvale Health",
+          "Crescent Therapeutics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Ashgrove Robotics",
+          "Northbridge Bio"
+        ],
+        "same_name_root_real_entity": [
+          "Cobalt Networks"
+        ],
+        "same_name_root_decoy_mention": [
+          "Cobalt Aerospace",
+          "Cobalt Analytics",
+          "Cobalt Logistics"
+        ],
+        "fuzzy_name_match": [
+          "Clearvale Energy",
+          "Cobalt Aerospace",
+          "Cobalt Analytics",
+          "Cobalt Logistics",
+          "Cobalt Networks",
+          "Crescent Energy",
+          "Ironwood Energy",
+          "Stonebrook Energy"
+        ]
+      },
+      "total_distinct_neighbors": 18
+    },
+    "Copperline Labs": {
+      "fact_group_id": "G057",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Stonebrook Labs"
+        ],
+        "same_headquarters": [
+          "Lumen Aerospace",
+          "Northbridge Health",
+          "Vertex Systems"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [
+          "Windrose Aerospace"
+        ],
+        "same_name_root_real_entity": [
+          "Copperline Networks"
+        ],
+        "same_name_root_decoy_mention": [
+          "Copperline Bio",
+          "Copperline Materials"
+        ],
+        "fuzzy_name_match": [
+          "Copperline Bio",
+          "Copperline Materials",
+          "Copperline Networks",
+          "Crescent Labs"
+        ]
+      },
+      "total_distinct_neighbors": 9
+    },
+    "Northbridge Genomics": {
+      "fact_group_id": "G058",
+      "entity_type": "company",
+      "neighbors": {
+        "same_industry": [
+          "Windrose Systems"
+        ],
+        "same_headquarters": [
+          "Crescent Logistics",
+          "Meridian Genomics"
+        ],
+        "same_ceo_value": [],
+        "same_flagship_product_value": [],
+        "same_name_root_real_entity": [
+          "Northbridge Bio",
+          "Northbridge Health"
+        ],
+        "same_name_root_decoy_mention": [],
+        "fuzzy_name_match": [
+          "Amber Genomics",
+          "Brightwell Genomics",
+          "Meridian Genomics",
+          "Northbridge Bio",
+          "Northbridge Health",
+          "Stonebrook Genomics"
+        ]
+      },
+      "total_distinct_neighbors": 8
+    },
+    "Carlos Virtanen": {
+      "fact_group_id": "G059",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Bilal Duarte",
+          "Erik Larsen",
+          "Hana Okonkwo",
+          "Sanjay Duarte",
+          "Sanjay Ivanov"
+        ],
+        "same_education": [
+          "Bilal Duarte",
+          "Bilal Nakamura",
+          "Ingrid Costa",
+          "Noor Petrov"
+        ],
+        "same_birth_city": [],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Hana Reyes",
+          "Lukas Blomqvist",
+          "Meera Sano",
+          "Noor Blomqvist"
+        ],
+        "current_company_value": "Ironwood Energy",
+        "previous_company_value": "Panasonic"
+      },
+      "total_distinct_neighbors": 12
+    },
+    "Erik Duarte": {
+      "fact_group_id": "G060",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Bilal Nakamura",
+          "Carlos Berg",
+          "Elin Duarte",
+          "Elin Osei",
+          "Hana Reyes",
+          "Noor Larsen",
+          "Noor Petrov"
+        ],
+        "same_education": [
+          "Erik Petrov",
+          "Layla Haddad",
+          "Lukas Blomqvist",
+          "Noor Virtanen"
+        ],
+        "same_birth_city": [
+          "Elin Reyes",
+          "Lukas Blomqvist"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Aiko Duarte",
+          "Erik Reyes",
+          "Ingrid Kessler",
+          "Layla Haddad",
+          "Noor Virtanen"
+        ],
+        "current_company_value": "Crescent Labs",
+        "previous_company_value": "Siemens"
+      },
+      "total_distinct_neighbors": 15
+    },
+    "Marco Duarte": {
+      "fact_group_id": "G061",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Diego Dube",
+          "Erik Reyes",
+          "Lukas Blomqvist",
+          "Lukas Petrov",
+          "Meera Sano"
+        ],
+        "same_education": [
+          "Erik Berg",
+          "Felix Silva",
+          "Hana Okonkwo",
+          "Lukas Petrov",
+          "Noor Larsen"
+        ],
+        "same_birth_city": [
+          "Aiko Kessler",
+          "Elin Duarte",
+          "Marco Silva"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Bilal Duarte",
+          "Carlos Petrov",
+          "Diego Dube"
+        ],
+        "current_company_value": "Sable Security",
+        "previous_company_value": "Samsung"
+      },
+      "total_distinct_neighbors": 14
+    },
+    "Carlos Berg": {
+      "fact_group_id": "G062",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Bilal Nakamura",
+          "Elin Duarte",
+          "Elin Osei",
+          "Erik Duarte",
+          "Hana Reyes",
+          "Noor Larsen",
+          "Noor Petrov"
+        ],
+        "same_education": [
+          "Elin Reyes",
+          "Ingrid Sano",
+          "Lukas Rahman"
+        ],
+        "same_birth_city": [
+          "Bilal Nakamura",
+          "Erik Petrov",
+          "Ingrid Costa",
+          "Layla Sano",
+          "Noor Larsen",
+          "Sanjay Duarte",
+          "Sanjay Rahman"
+        ],
+        "same_current_company": [
+          "Sanjay Rahman"
+        ],
+        "same_previous_company": [
+          "Erik Berg",
+          "Hana Okonkwo",
+          "Ingrid Sano",
+          "Noor Petrov",
+          "Sara Reyes"
+        ],
+        "current_company_value": "Sable Health",
+        "previous_company_value": "IBM"
+      },
+      "total_distinct_neighbors": 18
+    },
+    "Ingrid Costa": {
+      "fact_group_id": "G063",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Aiko Duarte",
+          "Aiko Kessler",
+          "Ingrid Kessler",
+          "Noor Blomqvist"
+        ],
+        "same_education": [
+          "Bilal Duarte",
+          "Bilal Nakamura",
+          "Carlos Virtanen",
+          "Noor Petrov"
+        ],
+        "same_birth_city": [
+          "Bilal Nakamura",
+          "Carlos Berg",
+          "Erik Petrov",
+          "Layla Sano",
+          "Noor Larsen",
+          "Sanjay Duarte",
+          "Sanjay Rahman"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Aiko Kessler",
+          "Anya Novak",
+          "Elena Marchetti",
+          "Elin Reyes",
+          "Lukas Petrov",
+          "Noor Okonkwo",
+          "Sanjay Ivanov"
+        ],
+        "current_company_value": "Stonebrook Health",
+        "previous_company_value": "Bosch"
+      },
+      "total_distinct_neighbors": 20
+    },
+    "Lukas Blomqvist": {
+      "fact_group_id": "G064",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Diego Dube",
+          "Erik Reyes",
+          "Lukas Petrov",
+          "Marco Duarte",
+          "Meera Sano"
+        ],
+        "same_education": [
+          "Erik Duarte",
+          "Erik Petrov",
+          "Layla Haddad",
+          "Noor Virtanen"
+        ],
+        "same_birth_city": [
+          "Elin Reyes",
+          "Erik Duarte"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Carlos Virtanen",
+          "Hana Reyes",
+          "Meera Sano",
+          "Noor Blomqvist"
+        ],
+        "current_company_value": "Crescent Dynamics",
+        "previous_company_value": "Panasonic"
+      },
+      "total_distinct_neighbors": 13
+    },
+    "Erik Reyes": {
+      "fact_group_id": "G065",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Diego Dube",
+          "Lukas Blomqvist",
+          "Lukas Petrov",
+          "Marco Duarte",
+          "Meera Sano"
+        ],
+        "same_education": [
+          "Elin Duarte",
+          "Elin Osei"
+        ],
+        "same_birth_city": [
+          "Noor Blomqvist"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Aiko Duarte",
+          "Erik Duarte",
+          "Ingrid Kessler",
+          "Layla Haddad",
+          "Noor Virtanen"
+        ],
+        "current_company_value": "Stonebrook Systems",
+        "previous_company_value": "Siemens"
+      },
+      "total_distinct_neighbors": 13
+    },
+    "Erik Berg": {
+      "fact_group_id": "G066",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Anya Novak",
+          "Carlos Ivanov",
+          "Carlos Petrov",
+          "Ingrid Sano",
+          "Lukas Sano",
+          "Marco Silva",
+          "Sanjay Rahman"
+        ],
+        "same_education": [
+          "Felix Silva",
+          "Hana Okonkwo",
+          "Lukas Petrov",
+          "Marco Duarte",
+          "Noor Larsen"
+        ],
+        "same_birth_city": [
+          "Aiko Duarte",
+          "Carlos Ivanov"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Carlos Berg",
+          "Hana Okonkwo",
+          "Ingrid Sano",
+          "Noor Petrov",
+          "Sara Reyes"
+        ],
+        "current_company_value": "Stonebrook Energy",
+        "previous_company_value": "IBM"
+      },
+      "total_distinct_neighbors": 16
+    },
+    "Elin Reyes": {
+      "fact_group_id": "G067",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Felix Silva",
+          "Layla Haddad",
+          "Layla Sano",
+          "Lukas Rahman",
+          "Noor Virtanen"
+        ],
+        "same_education": [
+          "Carlos Berg",
+          "Ingrid Sano",
+          "Lukas Rahman"
+        ],
+        "same_birth_city": [
+          "Erik Duarte",
+          "Lukas Blomqvist"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Aiko Kessler",
+          "Anya Novak",
+          "Elena Marchetti",
+          "Ingrid Costa",
+          "Lukas Petrov",
+          "Noor Okonkwo",
+          "Sanjay Ivanov"
+        ],
+        "current_company_value": "Amber Genomics",
+        "previous_company_value": "Bosch"
+      },
+      "total_distinct_neighbors": 16
+    },
+    "Erik Larsen": {
+      "fact_group_id": "G068",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Bilal Duarte",
+          "Carlos Virtanen",
+          "Hana Okonkwo",
+          "Sanjay Duarte",
+          "Sanjay Ivanov"
+        ],
+        "same_education": [
+          "Aiko Duarte",
+          "Aiko Kessler",
+          "Marco Silva"
+        ],
+        "same_birth_city": [
+          "Noor Virtanen"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Bilal Nakamura",
+          "Carlos Ivanov",
+          "Elin Osei",
+          "Felix Silva",
+          "Layla Sano",
+          "Lukas Rahman",
+          "Noor Larsen"
+        ],
+        "current_company_value": "Silvergate Therapeutics",
+        "previous_company_value": "Philips"
+      },
+      "total_distinct_neighbors": 16
+    },
+    "Noor Virtanen": {
+      "fact_group_id": "G069",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Elin Reyes",
+          "Felix Silva",
+          "Layla Haddad",
+          "Layla Sano",
+          "Lukas Rahman"
+        ],
+        "same_education": [
+          "Erik Duarte",
+          "Erik Petrov",
+          "Layla Haddad",
+          "Lukas Blomqvist"
+        ],
+        "same_birth_city": [
+          "Erik Larsen"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Aiko Duarte",
+          "Erik Duarte",
+          "Erik Reyes",
+          "Ingrid Kessler",
+          "Layla Haddad"
+        ],
+        "current_company_value": "Clearvale Aerospace",
+        "previous_company_value": "Siemens"
+      },
+      "total_distinct_neighbors": 12
+    },
+    "Sanjay Rahman": {
+      "fact_group_id": "G070",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Anya Novak",
+          "Carlos Ivanov",
+          "Carlos Petrov",
+          "Erik Berg",
+          "Ingrid Sano",
+          "Lukas Sano",
+          "Marco Silva"
+        ],
+        "same_education": [
+          "Anya Novak",
+          "Carlos Petrov",
+          "Diego Dube",
+          "Hana Reyes",
+          "Ingrid Kessler",
+          "Layla Sano",
+          "Noor Blomqvist",
+          "Sanjay Ivanov",
+          "Sara Reyes"
+        ],
+        "same_birth_city": [
+          "Bilal Nakamura",
+          "Carlos Berg",
+          "Erik Petrov",
+          "Ingrid Costa",
+          "Layla Sano",
+          "Noor Larsen",
+          "Sanjay Duarte"
+        ],
+        "same_current_company": [
+          "Carlos Berg"
+        ],
+        "same_previous_company": [
+          "Elin Duarte"
+        ],
+        "current_company_value": "Sable Health",
+        "previous_company_value": "Ericsson"
+      },
+      "total_distinct_neighbors": 21
+    },
+    "Meera Sano": {
+      "fact_group_id": "G071",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Diego Dube",
+          "Erik Reyes",
+          "Lukas Blomqvist",
+          "Lukas Petrov",
+          "Marco Duarte"
+        ],
+        "same_education": [
+          "Carlos Ivanov",
+          "Lukas Sano",
+          "Noor Okonkwo",
+          "Sanjay Duarte"
+        ],
+        "same_birth_city": [],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Carlos Virtanen",
+          "Hana Reyes",
+          "Lukas Blomqvist",
+          "Noor Blomqvist"
+        ],
+        "current_company_value": "Brightwell Logistics",
+        "previous_company_value": "Panasonic"
+      },
+      "total_distinct_neighbors": 12
+    },
+    "Aiko Duarte": {
+      "fact_group_id": "G072",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Aiko Kessler",
+          "Ingrid Costa",
+          "Ingrid Kessler",
+          "Noor Blomqvist"
+        ],
+        "same_education": [
+          "Aiko Kessler",
+          "Erik Larsen",
+          "Marco Silva"
+        ],
+        "same_birth_city": [
+          "Carlos Ivanov",
+          "Erik Berg"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Erik Duarte",
+          "Erik Reyes",
+          "Ingrid Kessler",
+          "Layla Haddad",
+          "Noor Virtanen"
+        ],
+        "current_company_value": "Halcyon Robotics",
+        "previous_company_value": "Siemens"
+      },
+      "total_distinct_neighbors": 12
+    },
+    "Carlos Petrov": {
+      "fact_group_id": "G073",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Anya Novak",
+          "Carlos Ivanov",
+          "Erik Berg",
+          "Ingrid Sano",
+          "Lukas Sano",
+          "Marco Silva",
+          "Sanjay Rahman"
+        ],
+        "same_education": [
+          "Anya Novak",
+          "Diego Dube",
+          "Hana Reyes",
+          "Ingrid Kessler",
+          "Layla Sano",
+          "Noor Blomqvist",
+          "Sanjay Ivanov",
+          "Sanjay Rahman",
+          "Sara Reyes"
+        ],
+        "same_birth_city": [
+          "Ingrid Kessler"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Bilal Duarte",
+          "Diego Dube",
+          "Marco Duarte"
+        ],
+        "current_company_value": "Clearvale Security",
+        "previous_company_value": "Samsung"
+      },
+      "total_distinct_neighbors": 16
+    },
+    "Noor Petrov": {
+      "fact_group_id": "G074",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Bilal Nakamura",
+          "Carlos Berg",
+          "Elin Duarte",
+          "Elin Osei",
+          "Erik Duarte",
+          "Hana Reyes",
+          "Noor Larsen"
+        ],
+        "same_education": [
+          "Bilal Duarte",
+          "Bilal Nakamura",
+          "Carlos Virtanen",
+          "Ingrid Costa"
+        ],
+        "same_birth_city": [
+          "Sara Reyes"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Carlos Berg",
+          "Erik Berg",
+          "Hana Okonkwo",
+          "Ingrid Sano",
+          "Sara Reyes"
+        ],
+        "current_company_value": "Silvergate Robotics",
+        "previous_company_value": "IBM"
+      },
+      "total_distinct_neighbors": 14
+    },
+    "Lukas Sano": {
+      "fact_group_id": "G075",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Anya Novak",
+          "Carlos Ivanov",
+          "Carlos Petrov",
+          "Erik Berg",
+          "Ingrid Sano",
+          "Marco Silva",
+          "Sanjay Rahman"
+        ],
+        "same_education": [
+          "Carlos Ivanov",
+          "Meera Sano",
+          "Noor Okonkwo",
+          "Sanjay Duarte"
+        ],
+        "same_birth_city": [
+          "Ingrid Sano",
+          "Noor Okonkwo",
+          "Sanjay Ivanov"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Erik Petrov",
+          "Marco Silva",
+          "Sanjay Duarte"
+        ],
+        "current_company_value": "Fernwood Dynamics",
+        "previous_company_value": "Nokia"
+      },
+      "total_distinct_neighbors": 12
+    },
+    "Layla Sano": {
+      "fact_group_id": "G076",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Elin Reyes",
+          "Felix Silva",
+          "Layla Haddad",
+          "Lukas Rahman",
+          "Noor Virtanen"
+        ],
+        "same_education": [
+          "Anya Novak",
+          "Carlos Petrov",
+          "Diego Dube",
+          "Hana Reyes",
+          "Ingrid Kessler",
+          "Noor Blomqvist",
+          "Sanjay Ivanov",
+          "Sanjay Rahman",
+          "Sara Reyes"
+        ],
+        "same_birth_city": [
+          "Bilal Nakamura",
+          "Carlos Berg",
+          "Erik Petrov",
+          "Ingrid Costa",
+          "Noor Larsen",
+          "Sanjay Duarte",
+          "Sanjay Rahman"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Bilal Nakamura",
+          "Carlos Ivanov",
+          "Elin Osei",
+          "Erik Larsen",
+          "Felix Silva",
+          "Lukas Rahman",
+          "Noor Larsen"
+        ],
+        "current_company_value": "Emberly Aerospace",
+        "previous_company_value": "Philips"
+      },
+      "total_distinct_neighbors": 23
+    },
+    "Diego Dube": {
+      "fact_group_id": "G077",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Erik Reyes",
+          "Lukas Blomqvist",
+          "Lukas Petrov",
+          "Marco Duarte",
+          "Meera Sano"
+        ],
+        "same_education": [
+          "Anya Novak",
+          "Carlos Petrov",
+          "Hana Reyes",
+          "Ingrid Kessler",
+          "Layla Sano",
+          "Noor Blomqvist",
+          "Sanjay Ivanov",
+          "Sanjay Rahman",
+          "Sara Reyes"
+        ],
+        "same_birth_city": [
+          "Anya Novak"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Bilal Duarte",
+          "Carlos Petrov",
+          "Marco Duarte"
+        ],
+        "current_company_value": "Ironwood Therapeutics",
+        "previous_company_value": "Samsung"
+      },
+      "total_distinct_neighbors": 15
+    },
+    "Ingrid Sano": {
+      "fact_group_id": "G078",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Anya Novak",
+          "Carlos Ivanov",
+          "Carlos Petrov",
+          "Erik Berg",
+          "Lukas Sano",
+          "Marco Silva",
+          "Sanjay Rahman"
+        ],
+        "same_education": [
+          "Carlos Berg",
+          "Elin Reyes",
+          "Lukas Rahman"
+        ],
+        "same_birth_city": [
+          "Lukas Sano",
+          "Noor Okonkwo",
+          "Sanjay Ivanov"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Carlos Berg",
+          "Erik Berg",
+          "Hana Okonkwo",
+          "Noor Petrov",
+          "Sara Reyes"
+        ],
+        "current_company_value": "Brightwell Genomics",
+        "previous_company_value": "IBM"
+      },
+      "total_distinct_neighbors": 15
+    },
+    "Sanjay Duarte": {
+      "fact_group_id": "G079",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Bilal Duarte",
+          "Carlos Virtanen",
+          "Erik Larsen",
+          "Hana Okonkwo",
+          "Sanjay Ivanov"
+        ],
+        "same_education": [
+          "Carlos Ivanov",
+          "Lukas Sano",
+          "Meera Sano",
+          "Noor Okonkwo"
+        ],
+        "same_birth_city": [
+          "Bilal Nakamura",
+          "Carlos Berg",
+          "Erik Petrov",
+          "Ingrid Costa",
+          "Layla Sano",
+          "Noor Larsen",
+          "Sanjay Rahman"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Erik Petrov",
+          "Lukas Sano",
+          "Marco Silva"
+        ],
+        "current_company_value": "Crescent Bio",
+        "previous_company_value": "Nokia"
+      },
+      "total_distinct_neighbors": 17
+    },
+    "Carlos Ivanov": {
+      "fact_group_id": "G080",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Anya Novak",
+          "Carlos Petrov",
+          "Erik Berg",
+          "Ingrid Sano",
+          "Lukas Sano",
+          "Marco Silva",
+          "Sanjay Rahman"
+        ],
+        "same_education": [
+          "Lukas Sano",
+          "Meera Sano",
+          "Noor Okonkwo",
+          "Sanjay Duarte"
+        ],
+        "same_birth_city": [
+          "Aiko Duarte",
+          "Erik Berg"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Bilal Nakamura",
+          "Elin Osei",
+          "Erik Larsen",
+          "Felix Silva",
+          "Layla Sano",
+          "Lukas Rahman",
+          "Noor Larsen"
+        ],
+        "current_company_value": "Meridian Therapeutics",
+        "previous_company_value": "Philips"
+      },
+      "total_distinct_neighbors": 18
+    },
+    "Elin Osei": {
+      "fact_group_id": "G081",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Bilal Nakamura",
+          "Carlos Berg",
+          "Elin Duarte",
+          "Erik Duarte",
+          "Hana Reyes",
+          "Noor Larsen",
+          "Noor Petrov"
+        ],
+        "same_education": [
+          "Elin Duarte",
+          "Erik Reyes"
+        ],
+        "same_birth_city": [
+          "Bilal Duarte",
+          "Felix Silva"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Bilal Nakamura",
+          "Carlos Ivanov",
+          "Erik Larsen",
+          "Felix Silva",
+          "Layla Sano",
+          "Lukas Rahman",
+          "Noor Larsen"
+        ],
+        "current_company_value": "Fernwood Health",
+        "previous_company_value": "Philips"
+      },
+      "total_distinct_neighbors": 14
+    },
+    "Noor Blomqvist": {
+      "fact_group_id": "G082",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Aiko Duarte",
+          "Aiko Kessler",
+          "Ingrid Costa",
+          "Ingrid Kessler"
+        ],
+        "same_education": [
+          "Anya Novak",
+          "Carlos Petrov",
+          "Diego Dube",
+          "Hana Reyes",
+          "Ingrid Kessler",
+          "Layla Sano",
+          "Sanjay Ivanov",
+          "Sanjay Rahman",
+          "Sara Reyes"
+        ],
+        "same_birth_city": [
+          "Erik Reyes"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Carlos Virtanen",
+          "Hana Reyes",
+          "Lukas Blomqvist",
+          "Meera Sano"
+        ],
+        "current_company_value": "Vertex Security",
+        "previous_company_value": "Panasonic"
+      },
+      "total_distinct_neighbors": 16
+    },
+    "Sanjay Ivanov": {
+      "fact_group_id": "G083",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Bilal Duarte",
+          "Carlos Virtanen",
+          "Erik Larsen",
+          "Hana Okonkwo",
+          "Sanjay Duarte"
+        ],
+        "same_education": [
+          "Anya Novak",
+          "Carlos Petrov",
+          "Diego Dube",
+          "Hana Reyes",
+          "Ingrid Kessler",
+          "Layla Sano",
+          "Noor Blomqvist",
+          "Sanjay Rahman",
+          "Sara Reyes"
+        ],
+        "same_birth_city": [
+          "Ingrid Sano",
+          "Lukas Sano",
+          "Noor Okonkwo"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Aiko Kessler",
+          "Anya Novak",
+          "Elena Marchetti",
+          "Elin Reyes",
+          "Ingrid Costa",
+          "Lukas Petrov",
+          "Noor Okonkwo"
+        ],
+        "current_company_value": "Copperline Materials",
+        "previous_company_value": "Bosch"
+      },
+      "total_distinct_neighbors": 22
+    },
+    "Erik Petrov": {
+      "fact_group_id": "G084",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Noor Okonkwo",
+          "Sara Reyes"
+        ],
+        "same_education": [
+          "Erik Duarte",
+          "Layla Haddad",
+          "Lukas Blomqvist",
+          "Noor Virtanen"
+        ],
+        "same_birth_city": [
+          "Bilal Nakamura",
+          "Carlos Berg",
+          "Ingrid Costa",
+          "Layla Sano",
+          "Noor Larsen",
+          "Sanjay Duarte",
+          "Sanjay Rahman"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Lukas Sano",
+          "Marco Silva",
+          "Sanjay Duarte"
+        ],
+        "current_company_value": "Vertex Health",
+        "previous_company_value": "Nokia"
+      },
+      "total_distinct_neighbors": 15
+    },
+    "Layla Haddad": {
+      "fact_group_id": "G085",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Elin Reyes",
+          "Felix Silva",
+          "Layla Sano",
+          "Lukas Rahman",
+          "Noor Virtanen"
+        ],
+        "same_education": [
+          "Erik Duarte",
+          "Erik Petrov",
+          "Lukas Blomqvist",
+          "Noor Virtanen"
+        ],
+        "same_birth_city": [
+          "Hana Reyes",
+          "Lukas Rahman"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Aiko Duarte",
+          "Erik Duarte",
+          "Erik Reyes",
+          "Ingrid Kessler",
+          "Noor Virtanen"
+        ],
+        "current_company_value": "Clearvale Materials",
+        "previous_company_value": "Siemens"
+      },
+      "total_distinct_neighbors": 12
+    },
+    "Aiko Kessler": {
+      "fact_group_id": "G086",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Aiko Duarte",
+          "Ingrid Costa",
+          "Ingrid Kessler",
+          "Noor Blomqvist"
+        ],
+        "same_education": [
+          "Aiko Duarte",
+          "Erik Larsen",
+          "Marco Silva"
+        ],
+        "same_birth_city": [
+          "Elin Duarte",
+          "Marco Duarte",
+          "Marco Silva"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Anya Novak",
+          "Elena Marchetti",
+          "Elin Reyes",
+          "Ingrid Costa",
+          "Lukas Petrov",
+          "Noor Okonkwo",
+          "Sanjay Ivanov"
+        ],
+        "current_company_value": "Meridian Security",
+        "previous_company_value": "Bosch"
+      },
+      "total_distinct_neighbors": 14
+    },
+    "Noor Larsen": {
+      "fact_group_id": "G087",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Bilal Nakamura",
+          "Carlos Berg",
+          "Elin Duarte",
+          "Elin Osei",
+          "Erik Duarte",
+          "Hana Reyes",
+          "Noor Petrov"
+        ],
+        "same_education": [
+          "Erik Berg",
+          "Felix Silva",
+          "Hana Okonkwo",
+          "Lukas Petrov",
+          "Marco Duarte"
+        ],
+        "same_birth_city": [
+          "Bilal Nakamura",
+          "Carlos Berg",
+          "Erik Petrov",
+          "Ingrid Costa",
+          "Layla Sano",
+          "Sanjay Duarte",
+          "Sanjay Rahman"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Bilal Nakamura",
+          "Carlos Ivanov",
+          "Elin Osei",
+          "Erik Larsen",
+          "Felix Silva",
+          "Layla Sano",
+          "Lukas Rahman"
+        ],
+        "current_company_value": "Sable Networks",
+        "previous_company_value": "Philips"
+      },
+      "total_distinct_neighbors": 20
+    },
+    "Ingrid Kessler": {
+      "fact_group_id": "G088",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Aiko Duarte",
+          "Aiko Kessler",
+          "Ingrid Costa",
+          "Noor Blomqvist"
+        ],
+        "same_education": [
+          "Anya Novak",
+          "Carlos Petrov",
+          "Diego Dube",
+          "Hana Reyes",
+          "Layla Sano",
+          "Noor Blomqvist",
+          "Sanjay Ivanov",
+          "Sanjay Rahman",
+          "Sara Reyes"
+        ],
+        "same_birth_city": [
+          "Carlos Petrov"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Aiko Duarte",
+          "Erik Duarte",
+          "Erik Reyes",
+          "Layla Haddad",
+          "Noor Virtanen"
+        ],
+        "current_company_value": "Crescent Security",
+        "previous_company_value": "Siemens"
+      },
+      "total_distinct_neighbors": 16
+    },
+    "Bilal Duarte": {
+      "fact_group_id": "G089",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Carlos Virtanen",
+          "Erik Larsen",
+          "Hana Okonkwo",
+          "Sanjay Duarte",
+          "Sanjay Ivanov"
+        ],
+        "same_education": [
+          "Bilal Nakamura",
+          "Carlos Virtanen",
+          "Ingrid Costa",
+          "Noor Petrov"
+        ],
+        "same_birth_city": [
+          "Elin Osei",
+          "Felix Silva"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Carlos Petrov",
+          "Diego Dube",
+          "Marco Duarte"
+        ],
+        "current_company_value": "Cobalt Logistics",
+        "previous_company_value": "Samsung"
+      },
+      "total_distinct_neighbors": 13
+    },
+    "Sara Reyes": {
+      "fact_group_id": "G090",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Erik Petrov",
+          "Noor Okonkwo"
+        ],
+        "same_education": [
+          "Anya Novak",
+          "Carlos Petrov",
+          "Diego Dube",
+          "Hana Reyes",
+          "Ingrid Kessler",
+          "Layla Sano",
+          "Noor Blomqvist",
+          "Sanjay Ivanov",
+          "Sanjay Rahman"
+        ],
+        "same_birth_city": [
+          "Noor Petrov"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Carlos Berg",
+          "Erik Berg",
+          "Hana Okonkwo",
+          "Ingrid Sano",
+          "Noor Petrov"
+        ],
+        "current_company_value": "Meridian Robotics",
+        "previous_company_value": "IBM"
+      },
+      "total_distinct_neighbors": 16
+    },
+    "Hana Okonkwo": {
+      "fact_group_id": "G091",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Bilal Duarte",
+          "Carlos Virtanen",
+          "Erik Larsen",
+          "Sanjay Duarte",
+          "Sanjay Ivanov"
+        ],
+        "same_education": [
+          "Erik Berg",
+          "Felix Silva",
+          "Lukas Petrov",
+          "Marco Duarte",
+          "Noor Larsen"
+        ],
+        "same_birth_city": [
+          "Lukas Petrov"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Carlos Berg",
+          "Erik Berg",
+          "Ingrid Sano",
+          "Noor Petrov",
+          "Sara Reyes"
+        ],
+        "current_company_value": "Fernwood Therapeutics",
+        "previous_company_value": "IBM"
+      },
+      "total_distinct_neighbors": 14
+    },
+    "Lukas Rahman": {
+      "fact_group_id": "G092",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Elin Reyes",
+          "Felix Silva",
+          "Layla Haddad",
+          "Layla Sano",
+          "Noor Virtanen"
+        ],
+        "same_education": [
+          "Carlos Berg",
+          "Elin Reyes",
+          "Ingrid Sano"
+        ],
+        "same_birth_city": [
+          "Hana Reyes",
+          "Layla Haddad"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Bilal Nakamura",
+          "Carlos Ivanov",
+          "Elin Osei",
+          "Erik Larsen",
+          "Felix Silva",
+          "Layla Sano",
+          "Noor Larsen"
+        ],
+        "current_company_value": "Ashgrove Aerospace",
+        "previous_company_value": "Philips"
+      },
+      "total_distinct_neighbors": 13
+    },
+    "Noor Okonkwo": {
+      "fact_group_id": "G093",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Erik Petrov",
+          "Sara Reyes"
+        ],
+        "same_education": [
+          "Carlos Ivanov",
+          "Lukas Sano",
+          "Meera Sano",
+          "Sanjay Duarte"
+        ],
+        "same_birth_city": [
+          "Ingrid Sano",
+          "Lukas Sano",
+          "Sanjay Ivanov"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Aiko Kessler",
+          "Anya Novak",
+          "Elena Marchetti",
+          "Elin Reyes",
+          "Ingrid Costa",
+          "Lukas Petrov",
+          "Sanjay Ivanov"
+        ],
+        "current_company_value": "Cobalt Aerospace",
+        "previous_company_value": "Bosch"
+      },
+      "total_distinct_neighbors": 14
+    },
+    "Felix Silva": {
+      "fact_group_id": "G094",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Elin Reyes",
+          "Layla Haddad",
+          "Layla Sano",
+          "Lukas Rahman",
+          "Noor Virtanen"
+        ],
+        "same_education": [
+          "Erik Berg",
+          "Hana Okonkwo",
+          "Lukas Petrov",
+          "Marco Duarte",
+          "Noor Larsen"
+        ],
+        "same_birth_city": [
+          "Bilal Duarte",
+          "Elin Osei"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Bilal Nakamura",
+          "Carlos Ivanov",
+          "Elin Osei",
+          "Erik Larsen",
+          "Layla Sano",
+          "Lukas Rahman",
+          "Noor Larsen"
+        ],
+        "current_company_value": "Windrose Logistics",
+        "previous_company_value": "Philips"
+      },
+      "total_distinct_neighbors": 15
+    },
+    "Bilal Nakamura": {
+      "fact_group_id": "G095",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Carlos Berg",
+          "Elin Duarte",
+          "Elin Osei",
+          "Erik Duarte",
+          "Hana Reyes",
+          "Noor Larsen",
+          "Noor Petrov"
+        ],
+        "same_education": [
+          "Bilal Duarte",
+          "Carlos Virtanen",
+          "Ingrid Costa",
+          "Noor Petrov"
+        ],
+        "same_birth_city": [
+          "Carlos Berg",
+          "Erik Petrov",
+          "Ingrid Costa",
+          "Layla Sano",
+          "Noor Larsen",
+          "Sanjay Duarte",
+          "Sanjay Rahman"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Carlos Ivanov",
+          "Elin Osei",
+          "Erik Larsen",
+          "Felix Silva",
+          "Layla Sano",
+          "Lukas Rahman",
+          "Noor Larsen"
+        ],
+        "current_company_value": "Stonebrook Genomics",
+        "previous_company_value": "Philips"
+      },
+      "total_distinct_neighbors": 18
+    },
+    "Marco Silva": {
+      "fact_group_id": "G096",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Anya Novak",
+          "Carlos Ivanov",
+          "Carlos Petrov",
+          "Erik Berg",
+          "Ingrid Sano",
+          "Lukas Sano",
+          "Sanjay Rahman"
+        ],
+        "same_education": [
+          "Aiko Duarte",
+          "Aiko Kessler",
+          "Erik Larsen"
+        ],
+        "same_birth_city": [
+          "Aiko Kessler",
+          "Elin Duarte",
+          "Marco Duarte"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Erik Petrov",
+          "Lukas Sano",
+          "Sanjay Duarte"
+        ],
+        "current_company_value": "Copperline Bio",
+        "previous_company_value": "Nokia"
+      },
+      "total_distinct_neighbors": 14
+    },
+    "Anya Novak": {
+      "fact_group_id": "G097",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Carlos Ivanov",
+          "Carlos Petrov",
+          "Erik Berg",
+          "Ingrid Sano",
+          "Lukas Sano",
+          "Marco Silva",
+          "Sanjay Rahman"
+        ],
+        "same_education": [
+          "Carlos Petrov",
+          "Diego Dube",
+          "Hana Reyes",
+          "Ingrid Kessler",
+          "Layla Sano",
+          "Noor Blomqvist",
+          "Sanjay Ivanov",
+          "Sanjay Rahman",
+          "Sara Reyes"
+        ],
+        "same_birth_city": [
+          "Diego Dube"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Aiko Kessler",
+          "Elena Marchetti",
+          "Elin Reyes",
+          "Ingrid Costa",
+          "Lukas Petrov",
+          "Noor Okonkwo",
+          "Sanjay Ivanov"
+        ],
+        "current_company_value": "Clearvale Logistics",
+        "previous_company_value": "Bosch"
+      },
+      "total_distinct_neighbors": 20
+    },
+    "Elin Duarte": {
+      "fact_group_id": "G098",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Bilal Nakamura",
+          "Carlos Berg",
+          "Elin Osei",
+          "Erik Duarte",
+          "Hana Reyes",
+          "Noor Larsen",
+          "Noor Petrov"
+        ],
+        "same_education": [
+          "Elin Osei",
+          "Erik Reyes"
+        ],
+        "same_birth_city": [
+          "Aiko Kessler",
+          "Marco Duarte",
+          "Marco Silva"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Sanjay Rahman"
+        ],
+        "current_company_value": "Cobalt Analytics",
+        "previous_company_value": "Ericsson"
+      },
+      "total_distinct_neighbors": 12
+    },
+    "Hana Reyes": {
+      "fact_group_id": "G099",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Bilal Nakamura",
+          "Carlos Berg",
+          "Elin Duarte",
+          "Elin Osei",
+          "Erik Duarte",
+          "Noor Larsen",
+          "Noor Petrov"
+        ],
+        "same_education": [
+          "Anya Novak",
+          "Carlos Petrov",
+          "Diego Dube",
+          "Ingrid Kessler",
+          "Layla Sano",
+          "Noor Blomqvist",
+          "Sanjay Ivanov",
+          "Sanjay Rahman",
+          "Sara Reyes"
+        ],
+        "same_birth_city": [
+          "Layla Haddad",
+          "Lukas Rahman"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Carlos Virtanen",
+          "Lukas Blomqvist",
+          "Meera Sano",
+          "Noor Blomqvist"
+        ],
+        "current_company_value": "Silvergate Bio",
+        "previous_company_value": "Panasonic"
+      },
+      "total_distinct_neighbors": 21
+    },
+    "Lukas Petrov": {
+      "fact_group_id": "G100",
+      "entity_type": "person",
+      "neighbors": {
+        "same_role": [
+          "Diego Dube",
+          "Erik Reyes",
+          "Lukas Blomqvist",
+          "Marco Duarte",
+          "Meera Sano"
+        ],
+        "same_education": [
+          "Erik Berg",
+          "Felix Silva",
+          "Hana Okonkwo",
+          "Marco Duarte",
+          "Noor Larsen"
+        ],
+        "same_birth_city": [
+          "Hana Okonkwo"
+        ],
+        "same_current_company": [],
+        "same_previous_company": [
+          "Aiko Kessler",
+          "Anya Novak",
+          "Elena Marchetti",
+          "Elin Reyes",
+          "Ingrid Costa",
+          "Noor Okonkwo",
+          "Sanjay Ivanov"
+        ],
+        "current_company_value": "Sable Bio",
+        "previous_company_value": "Bosch"
+      },
+      "total_distinct_neighbors": 16
+    }
+  }
+}
