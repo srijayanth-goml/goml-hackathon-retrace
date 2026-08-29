@@ -1,0 +1,11 @@
+# Module 2 (Baseline Fine-tuning) dependencies. Heavy/GPU-oriented on purpose --
+# NOT part of the repo-root requirements.txt (see ../CLAUDE.md Conventions).
+# Meant to be installed on Colab (see colab_runbook.md), not on a laptop with no GPU.
+torch>=2.1
+transformers>=4.44
+peft>=0.11
+trl>=0.9
+accelerate>=0.33
+datasets>=2.20
+bitsandbytes>=0.43   # only needed for the QLoRA fallback path (Design Doc Section 5); optional locally
+sentencepiece>=0.2

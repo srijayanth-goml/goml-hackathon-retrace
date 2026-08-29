@@ -1,0 +1,7 @@
+# Shared dependencies across ALL ReTrace modules. Keep this installable on a laptop
+# with no GPU and no ML stack -- module-specific heavy deps (torch, transformers,
+# peft, trl, bitsandbytes, unsloth, fastapi, etc.) belong in that module's own
+# requirements.txt (e.g. finetuning/requirements.txt, unlearning/requirements.txt),
+# not here.
+pandas>=2.0
+pytest>=7.4
