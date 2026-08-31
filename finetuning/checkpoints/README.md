@@ -2,7 +2,7 @@
 
 Adapter weights land here after a Colab run of `finetuning/train.py` (see
 `../colab_runbook.md`). This directory's contents are gitignored -- adapters are
-binary artifacts regenerable from `data/processed/train.jsonl` + `finetuning/config.py`'s
+binary artifacts regenerable from `data/processed/train.jsonl` + `finetuning/ft_config.py`'s
 hyperparameters, not source.
 
 Expected layout after both training runs:

@@ -11,7 +11,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import config as root_config
-from finetuning import config as ft_config
+from finetuning import ft_config
 
 BACKEND_DIR = Path(__file__).resolve().parent
 JOBS_DIR = BACKEND_DIR / "jobs"

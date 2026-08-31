@@ -9,13 +9,13 @@ the full design and open decisions.
 
 ## Layout
 
-- `config.py` — LoRA hyperparameters, training hyperparameters, and the flagship demo
+- `ft_config.py` — LoRA hyperparameters, training hyperparameters, and the flagship demo
   entity constant (currently NeuroSync Diagnostics / `G001` — a one-line change to
   retarget, see `plan.md`'s open decisions).
 - `prepare_data.py` — loads `train.jsonl`, builds Module 2's own train/validation split
   (separate from Module 1's train/heldout split), builds the retain-only filtered set
   for the reference model, and renders chat-template + assistant-only loss masks.
-- `lora_setup.py` — builds the PEFT `LoraConfig` from `config.py`.
+- `lora_setup.py` — builds the PEFT `LoraConfig` from `ft_config.py`.
 - `train.py` — the training entrypoint, run twice (`--mode baseline` / `--mode
   reference`) with the same code path and different data.
 - `eval_quick.py` — a fast post-training sanity check (forward-QA accuracy against
@@ -39,6 +39,22 @@ Outputs land in `checkpoints/` (adapters + `manifest.json`, gitignored except fo
 reports — hyperparameters, loss, quick-eval accuracy — tracked in git as evidence of
 what was actually run).
 
+## Evaluate a checkpoint standalone
+
+```bash
+python -m finetuning.eval_quick --which baseline                  # or --which reference
+python -m finetuning.eval_quick --adapter-dir path/to/adapter --limit 10
+python -m finetuning.eval_quick --which baseline --debug-samples 3 # rich per-example diagnostics
+```
+
+Must be run with `-m` from the repo root (not `python finetuning/eval_quick.py`) --
+see the note at the top of `eval_quick.py`'s CLI section for why direct script
+invocation breaks this repo's imports. `--debug-samples N` prints, for N real
+training examples, the decoded assistant-only-masked labels (what the model was
+actually trained to predict) plus the adapter's and the plain base model's generated
+answers side by side -- use it to tell apart "the adapter isn't being applied" from
+"the adapter learned something but it's wrong" if quick-eval accuracy looks off.
+
 ## Run the tests
 
 ```bash
@@ -49,16 +65,19 @@ pytest
 (no torch/transformers/peft needed) -- it tests the retain-only filter, the
 train/validation split, the LoRA target-module list, and the assistant-only
 loss-masking logic (via a small fake tokenizer, not a real download). One test
-(`test_build_lora_config_matches_config_py_when_peft_is_installed`) is skipped unless
+(`test_build_lora_config_matches_config_py_when_peft_is_installed` (name kept as-is; tests `ft_config.py`)) is skipped unless
 `peft` happens to be installed locally; that's expected off Colab.
 
 ## Decisions already locked in (see `../plan.md` for the reasoning)
 
 - LoRA rank 16, `lora_alpha` 32, dropout 0.05, targeting all of
   `q/k/v/o_proj` + `gate/up/down_proj` (attention *and* MLP, per `../CLAUDE.md`).
-- Assistant-only loss masking via a manual prompt-prefix mask (not a specific TRL
-  version's completion-only-loss API), so training doesn't hard-depend on TRL's
-  exact interface.
+- Assistant-only loss masking via a manual offset-mapping mask (tokenize the full
+  conversation once, use character offsets to find the prompt/assistant boundary --
+  not a specific TRL version's completion-only-loss API, and not comparing two
+  separately-tokenized sequences, which broke on a real run; see
+  `prepare_data.py`'s `render_and_mask` docstring), so training doesn't hard-depend
+  on TRL's exact interface.
 - The retain-only reference model excludes the flagship entity's own examples AND any
   relational example that merely mentions it (stricter than Module 3's later
   redact-don't-drop policy for relational examples during unlearning — see

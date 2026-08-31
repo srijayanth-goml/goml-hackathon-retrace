@@ -64,13 +64,13 @@ since `finetuning/requirements.txt` is installed here.
 !python -m finetuning.train --mode baseline
 ```
 
-Watch the logged training loss (every `LOGGING_STEPS`, see `finetuning/config.py`)
+Watch the logged training loss (every `LOGGING_STEPS`, see `finetuning/ft_config.py`)
 and, if a validation split exists, the eval loss. This also runs
 `finetuning/eval_quick.py`'s sanity-check pass at the end (skip it with
 `--skip-quick-eval` for a faster smoke test while iterating on hyperparameters).
 
 Expect this to take from a few minutes (A100) to something like 15-30 minutes (T4)
-for the default 3-epoch / ~2K-example config -- adjust `finetuning/config.py`'s
+for the default 3-epoch / ~2K-example config -- adjust `finetuning/ft_config.py`'s
 `NUM_EPOCHS` / `PER_DEVICE_BATCH_SIZE` if your actual throughput is very different
 from that (see plan.md's Module 2 "Open decisions").
 
@@ -84,7 +84,7 @@ Same LoRA config, same hyperparameters -- only the training data differs (the
 flagship demo entity's own examples and any relational mention of it are excluded;
 see `finetuning/prepare_data.py`'s `build_retain_only_records`). To retarget a
 different entity without touching code: `!python -m finetuning.train --mode
-reference --entity "Some Other Entity"` (also update `finetuning/config.py`'s
+reference --entity "Some Other Entity"` (also update `finetuning/ft_config.py`'s
 `FLAGSHIP_DEMO_FACT_GROUP_ID` to match, or pass it through explicitly if you extend
 the CLI -- see the TODO in `finetuning/train.py` if this becomes a real second/third
 reference model rather than a one-off retarget).
@@ -148,7 +148,7 @@ evidence of what was actually run.
 
 - **Sequence length.** `finetuning/train.py` prints a warning if the data's p99 token
   length exceeds `config.MAX_SEQ_LENGTH` (256 by default) -- raise it in
-  `finetuning/config.py` if you see that warning rather than silently truncating.
+  `finetuning/ft_config.py` if you see that warning rather than silently truncating.
 - **HF auth.** Qwen2.5-1.5B-Instruct is not gated as of this writing; if a future
   download fails with an auth error, set `HF_TOKEN` via `huggingface_hub.login()` or
   the `HF_TOKEN` Colab secret.

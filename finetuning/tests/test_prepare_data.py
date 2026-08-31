@@ -7,7 +7,7 @@ is to behave correctly on the real confusable-cluster structure of this dataset.
 from collections import Counter
 
 import config as root_config
-from finetuning import config as ft_config
+from finetuning import ft_config
 from finetuning.prepare_data import build_retain_only_records, load_train_records
 
 

@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 import config as root_config
-from finetuning import config as ft_config
+from finetuning import ft_config
 from finetuning import manifest as ft_manifest
 from finetuning.lora_setup import build_lora_config, verify_target_modules_present
 from finetuning.prepare_data import (
@@ -170,7 +170,7 @@ def _train_one(
         print(
             f"WARNING: p99 token length ({token_stats['p99']}) exceeds "
             f"MAX_SEQ_LENGTH ({ft_config.MAX_SEQ_LENGTH}) -- some examples will be "
-            f"truncated. Consider raising MAX_SEQ_LENGTH in finetuning/config.py. "
+            f"truncated. Consider raising MAX_SEQ_LENGTH in finetuning/ft_config.py. "
             f"Full stats: {token_stats}"
         )
 
@@ -340,19 +340,17 @@ def _run_quick_eval_on(adapter_dir: Path) -> dict:
     """Loads the base model + the just-trained adapter and runs eval_quick.py's
     sanity-check pass against data/processed/heldout.jsonl (read-only). Kept optional
     (skip_quick_eval) so a quick code/data-prep smoke test doesn't have to also pay
-    for a full generation pass over the held-out set."""
-    import torch
-    from peft import PeftModel
-    from transformers import AutoModelForCausalLM, AutoTokenizer
+    for a full generation pass over the held-out set.
 
-    from finetuning.eval_quick import run_quick_eval
+    Delegates model/tokenizer loading to eval_quick._load_model_and_tokenizer rather
+    than duplicating it here -- that helper includes a pad_token fallback
+    (tokenizer.pad_token = tokenizer.eos_token when unset) that an earlier version of
+    THIS function was missing; a None pad_token_id reaching model.generate() can
+    silently produce garbage output, which matters a lot for a function whose whole
+    job is judging whether training worked."""
+    from finetuning.eval_quick import _load_model_and_tokenizer, run_quick_eval
 
-    tokenizer = AutoTokenizer.from_pretrained(ft_config.MODEL_NAME)
-    base_model = AutoModelForCausalLM.from_pretrained(
-        ft_config.MODEL_NAME, torch_dtype=torch.bfloat16 if ft_config.BF16 else torch.float32
-    )
-    model = PeftModel.from_pretrained(base_model, str(adapter_dir))
-    model.eval()
+    model, tokenizer = _load_model_and_tokenizer(adapter_dir)
     summary, _details = run_quick_eval(model, tokenizer)
     return summary
 

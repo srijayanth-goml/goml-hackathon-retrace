@@ -17,12 +17,19 @@ interface CompareChatProps {
  * training until a judge explicitly picks a different one. This is the literal
  * live, side-by-side before/after Design Doc Section 8 and the brief's "a recorded
  * demo alone does not satisfy this" line both ask for.
+ *
+ * Until an erasure request has actually run, the manifest only HAS revision-0 --
+ * there is nothing genuine to compare against yet. Rather than silently rendering
+ * two identical "revision-0 (baseline)" panes side by side (which reads as broken,
+ * not as "nothing erased yet"), this screen says so plainly and points at where to
+ * fix that, per this repo's own "never a silent omission" convention.
  */
 export function CompareChat({ revisions }: CompareChatProps) {
   const highestRevision = useMemo(
     () => revisions.reduce((max, r) => Math.max(max, r.revision), 0),
     [revisions],
   );
+  const hasPostErasureRevision = revisions.some((r) => r.revision !== 0);
 
   const [rightRevision, setRightRevision] = useState(highestRevision);
   const [userPickedRight, setUserPickedRight] = useState(false);
@@ -50,6 +57,25 @@ export function CompareChat({ revisions }: CompareChatProps) {
 
   if (revisions.length === 0) {
     return <p className="text-sm text-slate-500 dark:text-slate-400">Loading revisions...</p>;
+  }
+
+  if (!hasPostErasureRevision) {
+    return (
+      <div className="space-y-3">
+        <div className="card border-amber-300 bg-amber-50 text-amber-900 dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-200">
+          <p className="text-sm">
+            <span className="font-semibold">No erasure has run yet</span> -- the manifest only contains
+            revision-0, so there is nothing genuine to compare it against. Go to{" "}
+            <span className="font-semibold">Submit Erasure Request</span>, pick an entity (or one of the example
+            requests) and submit it; once training + verification finish, revision-1 will show up here
+            automatically as the "compare against" side, live.
+          </p>
+        </div>
+        <div className="mx-auto max-w-2xl">
+          <ChatPane ref={leftRef} revision={0} title="revision-0 (baseline, pre-erasure)" />
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -96,7 +122,7 @@ export function CompareChat({ revisions }: CompareChatProps) {
             <ChatPane
               ref={rightRef}
               revision={rightRevision}
-              title={rightRevision === 0 ? "revision-0 (baseline)" : `revision-${rightRevision} (post-erasure)`}
+              title={`revision-${rightRevision} (post-erasure)`}
             />
           </div>
         </div>

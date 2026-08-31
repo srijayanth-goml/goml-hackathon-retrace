@@ -19,6 +19,17 @@ function labelFor(rev: RevisionSummary): string {
 export function RevisionPicker({ revisions, value, onChange, exclude = [] }: RevisionPickerProps) {
   const options = revisions.filter((r) => !exclude.includes(r.revision));
 
+  if (options.length === 0) {
+    // Defensive: callers (CompareChat) gate on there being something selectable
+    // before rendering this, but a mid-refresh moment where /revisions is
+    // temporarily stale shouldn't ever collapse to a blank, unlabeled <select>.
+    return (
+      <select disabled className="rounded-md border border-slate-300 bg-slate-100 px-2 py-1 text-sm text-slate-400 dark:border-slate-600 dark:bg-slate-800">
+        <option>no revision available</option>
+      </select>
+    );
+  }
+
   return (
     <select
       value={value}

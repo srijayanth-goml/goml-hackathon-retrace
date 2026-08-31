@@ -149,3 +149,25 @@ def test_boundary_token_straddling_prompt_and_assistant_text_is_masked_conservat
     # regardless of the tampered end offset -- start offset is the only thing
     # render_and_mask's masking rule looks at.
     assert result["labels"][0] == -100
+
+
+def test_compute_prompt_token_length_stats_reflects_real_content_length():
+    """Regression guard for a real bug: an earlier version of
+    compute_prompt_token_length_stats called
+    tokenizer.apply_chat_template(tokenize=True) directly and measured len() of the
+    result -- on a transformers version where that returns a dict/BatchEncoding
+    instead of a plain id list, len() silently measured the number of DICT KEYS (2)
+    instead of a token count, so every example came back reporting length "2"
+    regardless of content. This asserts the fixed version (which reuses
+    render_and_mask) produces lengths that actually scale with content size."""
+    from finetuning.prepare_data import compute_prompt_token_length_stats
+
+    tok = FakeTokenizer()
+    short = _record("Where is NeuroSync headquartered", "Denver")
+    long = _record("a " * 40, "b " * 40)
+
+    short_stats = compute_prompt_token_length_stats([short], tok)
+    long_stats = compute_prompt_token_length_stats([long], tok)
+
+    assert short_stats["max"] > 2
+    assert long_stats["max"] > short_stats["max"]

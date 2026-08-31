@@ -16,7 +16,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import config as root_config          # repo-root config.py: paths, MODEL_NAME, RANDOM_SEED
-from finetuning import config as ft_config   # reuse ONE checkpoints root (plan.md's Open Decisions)
+from finetuning import ft_config   # reuse ONE checkpoints root (plan.md's Open Decisions)
 
 UNLEARNING_DIR = Path(__file__).resolve().parent
 REPORTS_DIR = UNLEARNING_DIR / "reports"

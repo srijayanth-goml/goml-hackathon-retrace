@@ -1,13 +1,13 @@
 """
 Tests finetuning/lora_setup.py. The target_modules check is pure Python (no peft
-needed) since it only reads finetuning/config.py's constant; building an actual
+needed) since it only reads finetuning/ft_config.py's constant; building an actual
 peft.LoraConfig is skipped when peft isn't installed (expected on a laptop with no
 GPU/ML stack -- see ../requirements.txt and ../colab_runbook.md) rather than failing
 the whole test suite.
 """
 import pytest
 
-from finetuning import config as ft_config
+from finetuning import ft_config
 from finetuning.lora_setup import build_lora_config
 
 

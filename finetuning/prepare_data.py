@@ -32,7 +32,7 @@ import config as root_config
 from common.schema import ChatExample, ExampleMetadata
 from data_pipeline.format_chat import read_jsonl
 from data_pipeline.split import assign_example_splits, assign_group_splits
-from finetuning import config as ft_config
+from finetuning import ft_config
 
 Record = dict  # a {"messages": [...], "metadata": {...}} dict, as read from train.jsonl
 
@@ -233,11 +233,24 @@ def render_and_mask(record: Record, tokenizer, max_length: int) -> Dict[str, Lis
 
 def compute_prompt_token_length_stats(records: Sequence[Record], tokenizer) -> Dict[str, int]:
     """Full-conversation token-length percentiles, used to sanity-check
-    finetuning/config.py's MAX_SEQ_LENGTH against the actual data (step 5 of the plan:
+    finetuning/ft_config.py's MAX_SEQ_LENGTH against the actual data (step 5 of the plan:
     "measure the actual p99 token length ... and raise this if it's not comfortably
-    covered")."""
+    covered").
+
+    Reuses render_and_mask (with an effectively unbounded max_length, so nothing gets
+    truncated) rather than calling `tokenizer.apply_chat_template(..., tokenize=True,
+    ...)` directly and measuring `len()` of the result. An earlier version did exactly
+    that, and it silently broke on a real Colab run: some transformers versions have
+    `apply_chat_template(tokenize=True)` return a dict/BatchEncoding rather than a
+    plain list of token ids, so `len(...)` was measuring the number of DICT KEYS (2:
+    input_ids + attention_mask) instead of a token count -- every example's reported
+    length came back as a suspicious flat "2", which the resulting report should have
+    made obvious but didn't get caught before that training run. Going through
+    render_and_mask sidesteps the whole ambiguity: it never calls apply_chat_template
+    with tokenize=True (see its docstring), so there's nothing here to get confused by.
+    """
     lengths = sorted(
-        len(tokenizer.apply_chat_template(r["messages"], tokenize=True, add_generation_prompt=False))
+        len(render_and_mask(r, tokenizer, max_length=1_000_000)["input_ids"])
         for r in records
     )
     n = len(lengths)

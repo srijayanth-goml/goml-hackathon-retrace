@@ -20,7 +20,7 @@ import argparse
 from pathlib import Path
 from typing import Optional
 
-from finetuning import config as ft_config
+from finetuning import ft_config
 from unlearning import manifest as ul_manifest
 from unlearning.data import build_unlearning_batches, load_train_records
 from unlearning.model_io import load_single_adapter

@@ -1,21 +1,21 @@
 """
-Builds the PEFT LoraConfig from finetuning/config.py's hyperparameters. Kept as its
+Builds the PEFT LoraConfig from finetuning/ft_config.py's hyperparameters. Kept as its
 own thin module (rather than inlined in train.py) so both train.py and the tests can
-import it, and so `finetuning/config.py`'s LORA_* constants stay the single source of
+import it, and so `finetuning/ft_config.py`'s LORA_* constants stay the single source of
 truth for what "the shared LoRA adapter" (CLAUDE.md) actually targets.
 
 `peft` is imported lazily, inside build_lora_config(), so importing this module (and
-checking finetuning.config.LORA_TARGET_MODULES directly) never requires peft to be
+checking finetuning.ft_config.LORA_TARGET_MODULES directly) never requires peft to be
 installed -- only actually building a real LoraConfig does. See
 finetuning/tests/test_lora_setup.py.
 """
 from __future__ import annotations
 
-from finetuning import config as ft_config
+from finetuning import ft_config
 
 
 def build_lora_config():
-    """Returns a peft.LoraConfig built from finetuning/config.py. Requires `peft`
+    """Returns a peft.LoraConfig built from finetuning/ft_config.py. Requires `peft`
     installed (see finetuning/requirements.txt / colab_runbook.md)."""
     from peft import LoraConfig, TaskType
 
@@ -42,6 +42,6 @@ def verify_target_modules_present(model) -> None:
     if missing:
         raise ValueError(
             f"LORA_TARGET_MODULES names not found in the loaded model: {missing}. "
-            f"Check finetuning/config.py against the actual module names in "
+            f"Check finetuning/ft_config.py against the actual module names in "
             f"{ft_config.MODEL_NAME} (model.named_modules())."
         )

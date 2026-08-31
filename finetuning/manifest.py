@@ -16,7 +16,7 @@ import json
 from pathlib import Path
 from typing import Optional
 
-from finetuning import config as ft_config
+from finetuning import ft_config
 
 MANIFEST_PATH = ft_config.CHECKPOINTS_DIR / "manifest.json"
 

@@ -75,7 +75,7 @@ LOGGING_STEPS = 10
 EVAL_STEPS = 50
 SEED = 42
 
-# Re-exported for convenience so finetuning/*.py can do `from finetuning import config`
+# Re-exported for convenience so finetuning/*.py can do `from finetuning import ft_config`
 # and get everything (model name included) from one place.
 MODEL_NAME = root_config.MODEL_NAME  # Qwen/Qwen2.5-1.5B-Instruct
 

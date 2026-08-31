@@ -4,7 +4,7 @@ training-time loss monitoring, separate from Module 1's train/heldout split (see
 ../../plan.md's "Two gaps Module 1 left for this module to close"). Run against the
 actual data/processed/train.jsonl.
 """
-from finetuning import config as ft_config
+from finetuning import ft_config
 from finetuning.prepare_data import load_train_records, split_records_for_sft
 
 

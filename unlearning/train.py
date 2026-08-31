@@ -31,7 +31,7 @@ from pathlib import Path
 from typing import List, Optional
 
 import config as root_config
-from finetuning import config as ft_config
+from finetuning import ft_config
 from unlearning import config as ul_config
 from unlearning import eval_during_unlearning as ev
 from unlearning import manifest as ul_manifest
