@@ -20,3 +20,11 @@ peft>=0.11
 accelerate>=0.33
 safetensors>=0.4
 sentencepiece>=0.2
+# App backend (Module 5) -- runs locally like data_pipeline/unlearning/verification,
+# so it shares this root file too rather than starting a separate
+# app/backend/requirements.txt (locked decision, see plan.md's Module 5 Open
+# Decisions: continuing the pattern the three prior local modules already established).
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+httpx>=0.27          # needed by fastapi.testclient.TestClient (app/backend/tests/)

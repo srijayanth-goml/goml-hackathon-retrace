@@ -15,6 +15,12 @@ Needs torch/transformers/peft installed (see the repo-root requirements.txt) -- 
 necessarily a GPU: a 1.5B model in bf16 LoRA runs (slowly) on CPU or Apple
 Silicon/MPS too, which matters since this module is specified to run locally
 (Design Doc Section 10's open hardware question).
+
+Model loading (loading pi_ref + pi_theta from the same adapter) and batch collation
+are implemented in unlearning/model_io.py, not here -- extracted so
+verification/*.py (Module 4) can load a single adapter for eval without duplicating
+this logic (plan.md's Module 4 Open Decisions: "a pure extraction, no behavior
+change to Module 3's training path").
 """
 from __future__ import annotations
 
@@ -22,14 +28,14 @@ import argparse
 import json
 import random
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import List, Optional
 
 import config as root_config
 from finetuning import config as ft_config
-from finetuning.prepare_data import render_and_mask
 from unlearning import config as ul_config
 from unlearning import eval_during_unlearning as ev
 from unlearning import manifest as ul_manifest
+from unlearning import model_io
 from unlearning.data import build_unlearning_batches, forget_sampler, neighbor_weighted_sampler
 from unlearning.request import ErasureRequest
 
@@ -56,49 +62,6 @@ def _require_heavy_deps() -> None:
 
 def _relative_path(p: Path) -> str:
     return str(Path(p).resolve().relative_to(REPO_ROOT))
-
-
-def _pad_collate(records: List[dict], tokenizer, max_length: int, pad_token_id: int):
-    import torch
-
-    rows = [render_and_mask(r, tokenizer, max_length) for r in records]
-    max_len = max(len(row["input_ids"]) for row in rows)
-    pad_value_by_key = {"input_ids": pad_token_id, "attention_mask": 0, "labels": -100}
-    batch: Dict[str, "torch.Tensor"] = {}
-    for key, pad_value in pad_value_by_key.items():
-        seqs = []
-        for row in rows:
-            seq = list(row[key])
-            seqs.append(seq + [pad_value] * (max_len - len(seq)))
-        batch[key] = torch.tensor(seqs, dtype=torch.long)
-    return batch
-
-
-def _load_models(adapter_dir: Path, bf16: bool = True):
-    """Loads the base model TWICE -- once as the frozen pi_ref (baseline behavior,
-    never updated), once as the trainable pi_theta -- both starting from the SAME
-    parent adapter, per Design Doc Section 6's "two roles for the same starting
-    checkpoint". Returns (theta_model, ref_model, tokenizer)."""
-    import torch
-    from peft import PeftModel
-    from transformers import AutoModelForCausalLM, AutoTokenizer
-
-    dtype = torch.bfloat16 if bf16 else torch.float32
-    tokenizer = AutoTokenizer.from_pretrained(ul_config.MODEL_NAME)
-    if tokenizer.pad_token is None:
-        tokenizer.pad_token = tokenizer.eos_token
-
-    ref_base = AutoModelForCausalLM.from_pretrained(ul_config.MODEL_NAME, torch_dtype=dtype)
-    ref_model = PeftModel.from_pretrained(ref_base, str(adapter_dir))
-    ref_model.eval()
-    for p in ref_model.parameters():
-        p.requires_grad_(False)
-
-    theta_base = AutoModelForCausalLM.from_pretrained(ul_config.MODEL_NAME, torch_dtype=dtype)
-    theta_model = PeftModel.from_pretrained(theta_base, str(adapter_dir), is_trainable=True)
-    theta_model.train()
-
-    return theta_model, ref_model, tokenizer
 
 
 def _sample_general(records: List[dict], n: int, seed: int) -> List[dict]:
@@ -143,8 +106,8 @@ def _train_step(method, theta_model, ref_model, tokenizer, forget_records, retai
     from unlearning.npo import compute_batch_logps, npo_loss_tensor
     import torch
 
-    forget_batch = _pad_collate(forget_records, tokenizer, ft_config.MAX_SEQ_LENGTH, tokenizer.pad_token_id)
-    retain_batch = _pad_collate(retain_records, tokenizer, ft_config.MAX_SEQ_LENGTH, tokenizer.pad_token_id)
+    forget_batch = model_io.pad_collate(forget_records, tokenizer, ft_config.MAX_SEQ_LENGTH, tokenizer.pad_token_id)
+    retain_batch = model_io.pad_collate(retain_records, tokenizer, ft_config.MAX_SEQ_LENGTH, tokenizer.pad_token_id)
 
     if method == "npo":
         theta_forget_logps = compute_batch_logps(theta_model, forget_batch)
@@ -190,7 +153,7 @@ def run(
     batches = build_unlearning_batches(request)
     print(f"[unlearning:{method}] {batches.summary()}")
 
-    theta_model, ref_model, tokenizer = _load_models(adapter_dir, bf16=ft_config.BF16)
+    theta_model, ref_model, tokenizer = model_io.load_ref_and_theta(adapter_dir, ul_config.MODEL_NAME, bf16=ft_config.BF16)
 
     accuracy_before = _pre_unlearning_baseline(theta_model, tokenizer, batches)
     print(f"[unlearning:{method}] pre-unlearning accuracy: {accuracy_before}")
