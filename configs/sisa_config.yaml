@@ -1,0 +1,49 @@
+# SISA + LoRA Configuration for ReTrace Machine Unlearning
+
+model:
+  name_or_path: "Qwen/Qwen2.5-1.5B-Instruct"
+  torch_dtype: "bfloat16" # or float16 for T4 / float32 for CPU
+  trust_remote_code: true
+  max_seq_length: 512
+
+lora:
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+
+sisa:
+  num_shards: 4
+  num_slices_per_shard: 4
+  seed: 42
+  group_column: "fact_group_id"
+
+training:
+  learning_rate: 2.0e-4
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  batch_size: 4
+  gradient_accumulation_steps: 2
+  epochs_per_slice: 3
+  logging_steps: 5
+  save_total_limit: 10
+  optimizer: "adamw_torch"
+  lr_scheduler_type: "cosine"
+
+paths:
+  raw_excel: "knowledge_challenging_500 (1).xlsx"
+  data_dir: "data"
+  processed_jsonl: "data/augmented_dataset.jsonl"
+  shards_dir: "outputs/shards"
+  checkpoints_dir: "outputs/checkpoints"
+  unlearned_checkpoints_dir: "outputs/checkpoints_unlearned"
+  reports_dir: "outputs/reports"

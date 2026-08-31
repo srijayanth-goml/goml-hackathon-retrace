@@ -1,0 +1,44 @@
+{
+  "shard_id": 3,
+  "num_slices": 4,
+  "total_duration_seconds": 956.4381341934204,
+  "slice_checkpoints": {
+    "1": {
+      "shard_id": 3,
+      "slice_id": 1,
+      "num_records": 261,
+      "epochs": 3,
+      "final_loss": 0.07976434889221282,
+      "duration_seconds": 265.1644911766052,
+      "checkpoint_path": "outputs/checkpoints/shard_3/slice_1"
+    },
+    "2": {
+      "shard_id": 3,
+      "slice_id": 2,
+      "num_records": 227,
+      "epochs": 3,
+      "final_loss": 0.026062044266023134,
+      "duration_seconds": 232.01308178901672,
+      "checkpoint_path": "outputs/checkpoints/shard_3/slice_2"
+    },
+    "3": {
+      "shard_id": 3,
+      "slice_id": 3,
+      "num_records": 225,
+      "epochs": 3,
+      "final_loss": 0.02062188642173025,
+      "duration_seconds": 229.59222197532654,
+      "checkpoint_path": "outputs/checkpoints/shard_3/slice_3"
+    },
+    "4": {
+      "shard_id": 3,
+      "slice_id": 4,
+      "num_records": 225,
+      "epochs": 3,
+      "final_loss": 0.019496087083417366,
+      "duration_seconds": 228.80956363677979,
+      "checkpoint_path": "outputs/checkpoints/shard_3/slice_4"
+    }
+  },
+  "final_adapter_dir": "outputs/checkpoints/shard_3/final_adapter"
+}

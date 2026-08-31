@@ -1,0 +1,29 @@
+{
+  "target_group_id": "G056",
+  "target_entity": "Cobalt Energy",
+  "affected_shard_id": 1,
+  "affected_slice_id": 4,
+  "num_erased_examples": 38,
+  "retrained_slices": [
+    4
+  ],
+  "retrained_slices_count": 1,
+  "skipped_slices_count": 15,
+  "total_retrained_examples": 189,
+  "total_system_examples": 3753,
+  "compute_savings_percentage": 93.75,
+  "erasure_duration_seconds": 197.404,
+  "rollback_checkpoint": "outputs/checkpoints/shard_1/slice_3",
+  "final_unlearned_adapter": "outputs/checkpoints_unlearned/shard_1/final_adapter",
+  "retrained_slice_summaries": {
+    "4": {
+      "shard_id": 1,
+      "slice_id": 4,
+      "num_records": 189,
+      "epochs": 3,
+      "final_loss": 0.021547596798579132,
+      "duration_seconds": 196.44160199165344,
+      "checkpoint_path": "outputs/checkpoints_unlearned/shard_1/slice_4"
+    }
+  }
+}

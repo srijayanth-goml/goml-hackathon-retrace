@@ -1,0 +1,948 @@
+{
+  "config": {
+    "num_shards": 4,
+    "num_slices_per_shard": 4,
+    "seed": 42,
+    "group_column": "fact_group_id",
+    "output_dir": "outputs/shards"
+  },
+  "summary": {
+    "total_input_records": 3753,
+    "total_assigned_records": 3753,
+    "total_unique_groups": 100,
+    "num_shards": 4,
+    "num_slices_per_shard": 4
+  },
+  "group_locations": {
+    "G043": {
+      "shard_id": 1,
+      "slice_id": 1,
+      "entity": "Brightwell Robotics",
+      "num_examples": 38
+    },
+    "G066": {
+      "shard_id": 1,
+      "slice_id": 2,
+      "entity": "Erik Berg",
+      "num_examples": 37
+    },
+    "G016": {
+      "shard_id": 1,
+      "slice_id": 3,
+      "entity": "Windrose Health",
+      "num_examples": 38
+    },
+    "G056": {
+      "shard_id": 1,
+      "slice_id": 4,
+      "entity": "Cobalt Energy",
+      "num_examples": 38
+    },
+    "G049": {
+      "shard_id": 1,
+      "slice_id": 1,
+      "entity": "Silvergate Labs",
+      "num_examples": 38
+    },
+    "G031": {
+      "shard_id": 1,
+      "slice_id": 2,
+      "entity": "Crescent Materials",
+      "num_examples": 38
+    },
+    "G081": {
+      "shard_id": 1,
+      "slice_id": 3,
+      "entity": "Elin Osei",
+      "num_examples": 37
+    },
+    "G088": {
+      "shard_id": 1,
+      "slice_id": 4,
+      "entity": "Ingrid Kessler",
+      "num_examples": 37
+    },
+    "G060": {
+      "shard_id": 1,
+      "slice_id": 1,
+      "entity": "Erik Duarte",
+      "num_examples": 37
+    },
+    "G099": {
+      "shard_id": 1,
+      "slice_id": 2,
+      "entity": "Hana Reyes",
+      "num_examples": 37
+    },
+    "G037": {
+      "shard_id": 1,
+      "slice_id": 3,
+      "entity": "Windrose Robotics",
+      "num_examples": 38
+    },
+    "G019": {
+      "shard_id": 1,
+      "slice_id": 4,
+      "entity": "Amber Systems",
+      "num_examples": 38
+    },
+    "G008": {
+      "shard_id": 1,
+      "slice_id": 1,
+      "entity": "Solara Grid",
+      "num_examples": 38
+    },
+    "G003": {
+      "shard_id": 1,
+      "slice_id": 2,
+      "entity": "NeuroCore Diagnostics",
+      "num_examples": 38
+    },
+    "G059": {
+      "shard_id": 1,
+      "slice_id": 3,
+      "entity": "Carlos Virtanen",
+      "num_examples": 37
+    },
+    "G025": {
+      "shard_id": 1,
+      "slice_id": 4,
+      "entity": "Lumen Logistics",
+      "num_examples": 38
+    },
+    "G083": {
+      "shard_id": 1,
+      "slice_id": 1,
+      "entity": "Sanjay Ivanov",
+      "num_examples": 37
+    },
+    "G091": {
+      "shard_id": 1,
+      "slice_id": 2,
+      "entity": "Hana Okonkwo",
+      "num_examples": 37
+    },
+    "G058": {
+      "shard_id": 1,
+      "slice_id": 3,
+      "entity": "Northbridge Genomics",
+      "num_examples": 38
+    },
+    "G026": {
+      "shard_id": 1,
+      "slice_id": 4,
+      "entity": "Brightwell Health",
+      "num_examples": 38
+    },
+    "G065": {
+      "shard_id": 1,
+      "slice_id": 1,
+      "entity": "Erik Reyes",
+      "num_examples": 37
+    },
+    "G098": {
+      "shard_id": 1,
+      "slice_id": 2,
+      "entity": "Elin Duarte",
+      "num_examples": 37
+    },
+    "G012": {
+      "shard_id": 1,
+      "slice_id": 3,
+      "entity": "Chiara Bellini",
+      "num_examples": 37
+    },
+    "G018": {
+      "shard_id": 1,
+      "slice_id": 4,
+      "entity": "Vertex Logistics",
+      "num_examples": 38
+    },
+    "G095": {
+      "shard_id": 1,
+      "slice_id": 1,
+      "entity": "Bilal Nakamura",
+      "num_examples": 37
+    },
+    "G042": {
+      "shard_id": 2,
+      "slice_id": 1,
+      "entity": "Cobalt Networks",
+      "num_examples": 38
+    },
+    "G051": {
+      "shard_id": 2,
+      "slice_id": 2,
+      "entity": "Northbridge Bio",
+      "num_examples": 38
+    },
+    "G079": {
+      "shard_id": 2,
+      "slice_id": 3,
+      "entity": "Sanjay Duarte",
+      "num_examples": 37
+    },
+    "G057": {
+      "shard_id": 2,
+      "slice_id": 4,
+      "entity": "Copperline Labs",
+      "num_examples": 38
+    },
+    "G093": {
+      "shard_id": 2,
+      "slice_id": 1,
+      "entity": "Noor Okonkwo",
+      "num_examples": 37
+    },
+    "G022": {
+      "shard_id": 2,
+      "slice_id": 2,
+      "entity": "Halcyon Systems",
+      "num_examples": 38
+    },
+    "G050": {
+      "shard_id": 2,
+      "slice_id": 3,
+      "entity": "Windrose Systems",
+      "num_examples": 38
+    },
+    "G034": {
+      "shard_id": 2,
+      "slice_id": 4,
+      "entity": "Brightwell Security",
+      "num_examples": 38
+    },
+    "G064": {
+      "shard_id": 2,
+      "slice_id": 1,
+      "entity": "Lukas Blomqvist",
+      "num_examples": 37
+    },
+    "G053": {
+      "shard_id": 2,
+      "slice_id": 2,
+      "entity": "Crescent Analytics",
+      "num_examples": 38
+    },
+    "G024": {
+      "shard_id": 2,
+      "slice_id": 3,
+      "entity": "Fernwood Health",
+      "num_examples": 38
+    },
+    "G067": {
+      "shard_id": 2,
+      "slice_id": 4,
+      "entity": "Elin Reyes",
+      "num_examples": 37
+    },
+    "G035": {
+      "shard_id": 2,
+      "slice_id": 1,
+      "entity": "Clearvale Health",
+      "num_examples": 38
+    },
+    "G052": {
+      "shard_id": 2,
+      "slice_id": 2,
+      "entity": "Emberly Analytics",
+      "num_examples": 38
+    },
+    "G069": {
+      "shard_id": 2,
+      "slice_id": 3,
+      "entity": "Noor Virtanen",
+      "num_examples": 37
+    },
+    "G006": {
+      "shard_id": 2,
+      "slice_id": 4,
+      "entity": "QuantumLock Security",
+      "num_examples": 38
+    },
+    "G020": {
+      "shard_id": 2,
+      "slice_id": 1,
+      "entity": "Lumen Therapeutics",
+      "num_examples": 38
+    },
+    "G021": {
+      "shard_id": 2,
+      "slice_id": 2,
+      "entity": "Clearvale Energy",
+      "num_examples": 38
+    },
+    "G094": {
+      "shard_id": 2,
+      "slice_id": 3,
+      "entity": "Felix Silva",
+      "num_examples": 37
+    },
+    "G072": {
+      "shard_id": 2,
+      "slice_id": 4,
+      "entity": "Aiko Duarte",
+      "num_examples": 37
+    },
+    "G030": {
+      "shard_id": 2,
+      "slice_id": 1,
+      "entity": "Crescent Logistics",
+      "num_examples": 38
+    },
+    "G005": {
+      "shard_id": 2,
+      "slice_id": 2,
+      "entity": "AgriDrone Dynamics",
+      "num_examples": 38
+    },
+    "G070": {
+      "shard_id": 2,
+      "slice_id": 3,
+      "entity": "Sanjay Rahman",
+      "num_examples": 37
+    },
+    "G029": {
+      "shard_id": 2,
+      "slice_id": 4,
+      "entity": "Silvergate Aerospace",
+      "num_examples": 38
+    },
+    "G004": {
+      "shard_id": 2,
+      "slice_id": 1,
+      "entity": "AgroDrone Systems",
+      "num_examples": 38
+    },
+    "G092": {
+      "shard_id": 3,
+      "slice_id": 1,
+      "entity": "Lukas Rahman",
+      "num_examples": 37
+    },
+    "G002": {
+      "shard_id": 3,
+      "slice_id": 2,
+      "entity": "NeuroWave Diagnostics",
+      "num_examples": 38
+    },
+    "G074": {
+      "shard_id": 3,
+      "slice_id": 3,
+      "entity": "Noor Petrov",
+      "num_examples": 37
+    },
+    "G073": {
+      "shard_id": 3,
+      "slice_id": 4,
+      "entity": "Carlos Petrov",
+      "num_examples": 37
+    },
+    "G077": {
+      "shard_id": 3,
+      "slice_id": 1,
+      "entity": "Diego Dube",
+      "num_examples": 37
+    },
+    "G033": {
+      "shard_id": 3,
+      "slice_id": 2,
+      "entity": "Vertex Systems",
+      "num_examples": 38
+    },
+    "G084": {
+      "shard_id": 3,
+      "slice_id": 3,
+      "entity": "Erik Petrov",
+      "num_examples": 37
+    },
+    "G009": {
+      "shard_id": 3,
+      "slice_id": 4,
+      "entity": "Helion Power",
+      "num_examples": 38
+    },
+    "G075": {
+      "shard_id": 3,
+      "slice_id": 1,
+      "entity": "Lukas Sano",
+      "num_examples": 37
+    },
+    "G086": {
+      "shard_id": 3,
+      "slice_id": 2,
+      "entity": "Aiko Kessler",
+      "num_examples": 37
+    },
+    "G040": {
+      "shard_id": 3,
+      "slice_id": 3,
+      "entity": "Copperline Networks",
+      "num_examples": 38
+    },
+    "G062": {
+      "shard_id": 3,
+      "slice_id": 4,
+      "entity": "Carlos Berg",
+      "num_examples": 37
+    },
+    "G100": {
+      "shard_id": 3,
+      "slice_id": 1,
+      "entity": "Lukas Petrov",
+      "num_examples": 37
+    },
+    "G017": {
+      "shard_id": 3,
+      "slice_id": 2,
+      "entity": "Vertex Materials",
+      "num_examples": 38
+    },
+    "G023": {
+      "shard_id": 3,
+      "slice_id": 3,
+      "entity": "Driftwood Bio",
+      "num_examples": 38
+    },
+    "G007": {
+      "shard_id": 3,
+      "slice_id": 4,
+      "entity": "QuantumGate Security",
+      "num_examples": 38
+    },
+    "G080": {
+      "shard_id": 3,
+      "slice_id": 1,
+      "entity": "Carlos Ivanov",
+      "num_examples": 37
+    },
+    "G001": {
+      "shard_id": 3,
+      "slice_id": 2,
+      "entity": "NeuroSync Diagnostics",
+      "num_examples": 38
+    },
+    "G054": {
+      "shard_id": 3,
+      "slice_id": 3,
+      "entity": "Crescent Energy",
+      "num_examples": 38
+    },
+    "G085": {
+      "shard_id": 3,
+      "slice_id": 4,
+      "entity": "Layla Haddad",
+      "num_examples": 37
+    },
+    "G028": {
+      "shard_id": 3,
+      "slice_id": 1,
+      "entity": "Brightwell Systems",
+      "num_examples": 38
+    },
+    "G055": {
+      "shard_id": 3,
+      "slice_id": 2,
+      "entity": "Meridian Genomics",
+      "num_examples": 38
+    },
+    "G087": {
+      "shard_id": 3,
+      "slice_id": 3,
+      "entity": "Noor Larsen",
+      "num_examples": 37
+    },
+    "G032": {
+      "shard_id": 3,
+      "slice_id": 4,
+      "entity": "Driftwood Logistics",
+      "num_examples": 38
+    },
+    "G015": {
+      "shard_id": 3,
+      "slice_id": 1,
+      "entity": "Ashgrove Dynamics",
+      "num_examples": 38
+    },
+    "G010": {
+      "shard_id": 4,
+      "slice_id": 1,
+      "entity": "Elena Marchetti",
+      "num_examples": 37
+    },
+    "G071": {
+      "shard_id": 4,
+      "slice_id": 2,
+      "entity": "Meera Sano",
+      "num_examples": 37
+    },
+    "G011": {
+      "shard_id": 4,
+      "slice_id": 3,
+      "entity": "Davide Ferraro",
+      "num_examples": 37
+    },
+    "G046": {
+      "shard_id": 4,
+      "slice_id": 4,
+      "entity": "Stonebrook Labs",
+      "num_examples": 38
+    },
+    "G038": {
+      "shard_id": 4,
+      "slice_id": 1,
+      "entity": "Stonebrook Robotics",
+      "num_examples": 38
+    },
+    "G097": {
+      "shard_id": 4,
+      "slice_id": 2,
+      "entity": "Anya Novak",
+      "num_examples": 37
+    },
+    "G027": {
+      "shard_id": 4,
+      "slice_id": 3,
+      "entity": "Crescent Therapeutics",
+      "num_examples": 38
+    },
+    "G048": {
+      "shard_id": 4,
+      "slice_id": 4,
+      "entity": "Windrose Aerospace",
+      "num_examples": 38
+    },
+    "G045": {
+      "shard_id": 4,
+      "slice_id": 1,
+      "entity": "Lumen Aerospace",
+      "num_examples": 38
+    },
+    "G013": {
+      "shard_id": 4,
+      "slice_id": 2,
+      "entity": "Femi Adeyemi",
+      "num_examples": 37
+    },
+    "G041": {
+      "shard_id": 4,
+      "slice_id": 3,
+      "entity": "Emberly Networks",
+      "num_examples": 38
+    },
+    "G061": {
+      "shard_id": 4,
+      "slice_id": 4,
+      "entity": "Marco Duarte",
+      "num_examples": 37
+    },
+    "G047": {
+      "shard_id": 4,
+      "slice_id": 1,
+      "entity": "Northbridge Health",
+      "num_examples": 38
+    },
+    "G039": {
+      "shard_id": 4,
+      "slice_id": 2,
+      "entity": "Brightwell Logistics",
+      "num_examples": 38
+    },
+    "G063": {
+      "shard_id": 4,
+      "slice_id": 3,
+      "entity": "Ingrid Costa",
+      "num_examples": 37
+    },
+    "G068": {
+      "shard_id": 4,
+      "slice_id": 4,
+      "entity": "Erik Larsen",
+      "num_examples": 37
+    },
+    "G044": {
+      "shard_id": 4,
+      "slice_id": 1,
+      "entity": "Fernwood Analytics",
+      "num_examples": 38
+    },
+    "G096": {
+      "shard_id": 4,
+      "slice_id": 2,
+      "entity": "Marco Silva",
+      "num_examples": 37
+    },
+    "G090": {
+      "shard_id": 4,
+      "slice_id": 3,
+      "entity": "Sara Reyes",
+      "num_examples": 37
+    },
+    "G078": {
+      "shard_id": 4,
+      "slice_id": 4,
+      "entity": "Ingrid Sano",
+      "num_examples": 37
+    },
+    "G089": {
+      "shard_id": 4,
+      "slice_id": 1,
+      "entity": "Bilal Duarte",
+      "num_examples": 37
+    },
+    "G076": {
+      "shard_id": 4,
+      "slice_id": 2,
+      "entity": "Layla Sano",
+      "num_examples": 37
+    },
+    "G014": {
+      "shard_id": 4,
+      "slice_id": 3,
+      "entity": "Ngozi Okafor",
+      "num_examples": 37
+    },
+    "G036": {
+      "shard_id": 4,
+      "slice_id": 4,
+      "entity": "Ashgrove Robotics",
+      "num_examples": 38
+    },
+    "G082": {
+      "shard_id": 4,
+      "slice_id": 1,
+      "entity": "Noor Blomqvist",
+      "num_examples": 37
+    }
+  },
+  "shards": {
+    "1": {
+      "shard_id": 1,
+      "total_examples": 938,
+      "groups": [
+        "G043",
+        "G066",
+        "G016",
+        "G056",
+        "G049",
+        "G031",
+        "G081",
+        "G088",
+        "G060",
+        "G099",
+        "G037",
+        "G019",
+        "G008",
+        "G003",
+        "G059",
+        "G025",
+        "G083",
+        "G091",
+        "G058",
+        "G026",
+        "G065",
+        "G098",
+        "G012",
+        "G018",
+        "G095"
+      ],
+      "slices": {
+        "1": {
+          "slice_id": 1,
+          "groups": [
+            "G043",
+            "G049",
+            "G060",
+            "G008",
+            "G083",
+            "G065",
+            "G095"
+          ],
+          "num_examples": 262
+        },
+        "2": {
+          "slice_id": 2,
+          "groups": [
+            "G066",
+            "G031",
+            "G099",
+            "G003",
+            "G091",
+            "G098"
+          ],
+          "num_examples": 224
+        },
+        "3": {
+          "slice_id": 3,
+          "groups": [
+            "G016",
+            "G081",
+            "G037",
+            "G059",
+            "G058",
+            "G012"
+          ],
+          "num_examples": 225
+        },
+        "4": {
+          "slice_id": 4,
+          "groups": [
+            "G056",
+            "G088",
+            "G019",
+            "G025",
+            "G026",
+            "G018"
+          ],
+          "num_examples": 227
+        }
+      }
+    },
+    "2": {
+      "shard_id": 2,
+      "total_examples": 942,
+      "groups": [
+        "G042",
+        "G051",
+        "G079",
+        "G057",
+        "G093",
+        "G022",
+        "G050",
+        "G034",
+        "G064",
+        "G053",
+        "G024",
+        "G067",
+        "G035",
+        "G052",
+        "G069",
+        "G006",
+        "G020",
+        "G021",
+        "G094",
+        "G072",
+        "G030",
+        "G005",
+        "G070",
+        "G029",
+        "G004"
+      ],
+      "slices": {
+        "1": {
+          "slice_id": 1,
+          "groups": [
+            "G042",
+            "G093",
+            "G064",
+            "G035",
+            "G020",
+            "G030",
+            "G004"
+          ],
+          "num_examples": 264
+        },
+        "2": {
+          "slice_id": 2,
+          "groups": [
+            "G051",
+            "G022",
+            "G053",
+            "G052",
+            "G021",
+            "G005"
+          ],
+          "num_examples": 228
+        },
+        "3": {
+          "slice_id": 3,
+          "groups": [
+            "G079",
+            "G050",
+            "G024",
+            "G069",
+            "G094",
+            "G070"
+          ],
+          "num_examples": 224
+        },
+        "4": {
+          "slice_id": 4,
+          "groups": [
+            "G057",
+            "G034",
+            "G067",
+            "G006",
+            "G072",
+            "G029"
+          ],
+          "num_examples": 226
+        }
+      }
+    },
+    "3": {
+      "shard_id": 3,
+      "total_examples": 938,
+      "groups": [
+        "G092",
+        "G002",
+        "G074",
+        "G073",
+        "G077",
+        "G033",
+        "G084",
+        "G009",
+        "G075",
+        "G086",
+        "G040",
+        "G062",
+        "G100",
+        "G017",
+        "G023",
+        "G007",
+        "G080",
+        "G001",
+        "G054",
+        "G085",
+        "G028",
+        "G055",
+        "G087",
+        "G032",
+        "G015"
+      ],
+      "slices": {
+        "1": {
+          "slice_id": 1,
+          "groups": [
+            "G092",
+            "G077",
+            "G075",
+            "G100",
+            "G080",
+            "G028",
+            "G015"
+          ],
+          "num_examples": 261
+        },
+        "2": {
+          "slice_id": 2,
+          "groups": [
+            "G002",
+            "G033",
+            "G086",
+            "G017",
+            "G001",
+            "G055"
+          ],
+          "num_examples": 227
+        },
+        "3": {
+          "slice_id": 3,
+          "groups": [
+            "G074",
+            "G084",
+            "G040",
+            "G023",
+            "G054",
+            "G087"
+          ],
+          "num_examples": 225
+        },
+        "4": {
+          "slice_id": 4,
+          "groups": [
+            "G073",
+            "G009",
+            "G062",
+            "G007",
+            "G085",
+            "G032"
+          ],
+          "num_examples": 225
+        }
+      }
+    },
+    "4": {
+      "shard_id": 4,
+      "total_examples": 935,
+      "groups": [
+        "G010",
+        "G071",
+        "G011",
+        "G046",
+        "G038",
+        "G097",
+        "G027",
+        "G048",
+        "G045",
+        "G013",
+        "G041",
+        "G061",
+        "G047",
+        "G039",
+        "G063",
+        "G068",
+        "G044",
+        "G096",
+        "G090",
+        "G078",
+        "G089",
+        "G076",
+        "G014",
+        "G036",
+        "G082"
+      ],
+      "slices": {
+        "1": {
+          "slice_id": 1,
+          "groups": [
+            "G010",
+            "G038",
+            "G045",
+            "G047",
+            "G044",
+            "G089",
+            "G082"
+          ],
+          "num_examples": 263
+        },
+        "2": {
+          "slice_id": 2,
+          "groups": [
+            "G071",
+            "G097",
+            "G013",
+            "G039",
+            "G096",
+            "G076"
+          ],
+          "num_examples": 223
+        },
+        "3": {
+          "slice_id": 3,
+          "groups": [
+            "G011",
+            "G027",
+            "G041",
+            "G063",
+            "G090",
+            "G014"
+          ],
+          "num_examples": 224
+        },
+        "4": {
+          "slice_id": 4,
+          "groups": [
+            "G046",
+            "G048",
+            "G061",
+            "G068",
+            "G078",
+            "G036"
+          ],
+          "num_examples": 225
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "shard_id": 4,
+  "slice_id": 1,
+  "num_records": 263,
+  "epochs": 3,
+  "final_loss": 0.023834521031169446,
+  "duration_seconds": 270.15396761894226,
+  "checkpoint_path": "outputs/checkpoints/shard_4/slice_1"
+}

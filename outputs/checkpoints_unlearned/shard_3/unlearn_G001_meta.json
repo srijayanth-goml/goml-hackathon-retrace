@@ -1,0 +1,46 @@
+{
+  "target_group_id": "G001",
+  "target_entity": "NeuroSync Diagnostics",
+  "affected_shard_id": 3,
+  "affected_slice_id": 2,
+  "num_erased_examples": 38,
+  "retrained_slices": [
+    2,
+    3,
+    4
+  ],
+  "retrained_slices_count": 3,
+  "skipped_slices_count": 13,
+  "total_retrained_examples": 639,
+  "total_system_examples": 3753,
+  "compute_savings_percentage": 81.25,
+  "erasure_duration_seconds": 0.016,
+  "rollback_checkpoint": "outputs/checkpoints\\shard_3\\slice_1",
+  "final_unlearned_adapter": "outputs/checkpoints_unlearned\\shard_3\\final_adapter",
+  "retrained_slice_summaries": {
+    "2": {
+      "shard_id": 3,
+      "slice_id": 2,
+      "checkpoint_path": "outputs/checkpoints_unlearned\\shard_3\\slice_2",
+      "num_records": 189,
+      "duration_seconds": 0.01,
+      "final_loss": 0.0
+    },
+    "3": {
+      "shard_id": 3,
+      "slice_id": 3,
+      "checkpoint_path": "outputs/checkpoints_unlearned\\shard_3\\slice_3",
+      "num_records": 225,
+      "duration_seconds": 0.01,
+      "final_loss": 0.0
+    },
+    "4": {
+      "shard_id": 3,
+      "slice_id": 4,
+      "checkpoint_path": "outputs/checkpoints_unlearned\\shard_3\\slice_4",
+      "num_records": 225,
+      "duration_seconds": 0.01,
+      "final_loss": 0.0
+    }
+  }
+}

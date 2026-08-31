@@ -1,0 +1,53 @@
+{
+  "evaluation_timestamp": "2026-08-30 11:18:05",
+  "target": {
+    "fact_group_id": "G056",
+    "entity": "Cobalt Energy",
+    "shard_id": 1,
+    "slice_id": 4
+  },
+  "summary_metrics": {
+    "target_forgetting_rate_pct": 100.0,
+    "target_leakage_rate_pct": 0.0,
+    "retention_accuracy_pct": 2.0,
+    "collateral_damage_pct": 0.0,
+    "theoretical_speedup_factor": 16.0,
+    "eval_duration_seconds": 313.91
+  },
+  "probe_suite_breakdown": {
+    "direct_probes": {
+      "count": 15,
+      "accuracy_before_unlearning_pct": 0.0,
+      "accuracy_after_unlearning_pct": 0.0,
+      "forgetting_pct": 100.0
+    },
+    "paraphrased_probes": {
+      "count": 15,
+      "accuracy_before_unlearning_pct": 0.0,
+      "accuracy_after_unlearning_pct": 0.0,
+      "forgetting_pct": 100.0
+    },
+    "reverse_probes": {
+      "count": 5,
+      "accuracy_before_unlearning_pct": 0.0,
+      "accuracy_after_unlearning_pct": 0.0,
+      "forgetting_pct": 100.0
+    },
+    "multi_hop_probes": {
+      "count": 3,
+      "accuracy_before_unlearning_pct": 0.0,
+      "accuracy_after_unlearning_pct": 0.0,
+      "forgetting_pct": 100.0
+    },
+    "retention_probes": {
+      "count": 50,
+      "accuracy_before_unlearning_pct": 2.0,
+      "accuracy_after_unlearning_pct": 2.0
+    },
+    "neighbor_probes": {
+      "count": 50,
+      "accuracy_before_unlearning_pct": 12.0,
+      "accuracy_after_unlearning_pct": 12.0
+    }
+  }
+}
