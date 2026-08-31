@@ -1,0 +1,63 @@
+{
+  "title": "Module 2 baseline (revision-0) training report",
+  "run_name": "revision-0-baseline",
+  "created_at": "2026-08-29T15:18:07.805285+00:00",
+  "lora_config": {
+    "r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "bias": "none",
+    "task_type": "CAUSAL_LM"
+  },
+  "training_args": {
+    "num_epochs": 3,
+    "per_device_batch_size": 4,
+    "grad_accumulation_steps": 4,
+    "effective_batch_size": 16,
+    "learning_rate": 0.0002,
+    "lr_scheduler_type": "cosine",
+    "warmup_ratio": 0.03,
+    "max_seq_length": 256,
+    "bf16": true,
+    "seed": 42
+  },
+  "dataset": {
+    "train_jsonl_sha256": "e73cabee17ea52823aa091d7826ea7c63d07146f35d152bc1aa898c0c8ed1cc2",
+    "num_train_examples": 2264,
+    "num_sft_train": 2043,
+    "num_sft_val": 221,
+    "token_length_stats": {
+      "n": 2264,
+      "p50": 2,
+      "p90": 2,
+      "p99": 2,
+      "max": 2
+    }
+  },
+  "final_train_loss": 0.2986767156980932,
+  "quick_eval": {
+    "n": 100,
+    "overall_accuracy": 0.04,
+    "accuracy_by_attribute": {
+      "birth_city": 0.0,
+      "ceo": 0.0,
+      "current_company": 0.0,
+      "education": 0.0,
+      "flagship_product": 0.0,
+      "founded_year": 0.0,
+      "headquarters": 0.09090909090909091,
+      "industry": 0.09090909090909091,
+      "previous_company": 0.2222222222222222,
+      "role": 0.0
+    }
+  }
+}

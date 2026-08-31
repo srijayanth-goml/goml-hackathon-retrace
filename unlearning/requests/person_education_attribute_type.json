@@ -1,0 +1,4 @@
+{
+  "attribute": "education",
+  "_comment": "Person-side symmetric attribute-type case (review doc's suggestion) -- 47 facts, exercising the single largest cluster in the dataset (10 people share Tallinn University of Technology as their listed education)."
+}

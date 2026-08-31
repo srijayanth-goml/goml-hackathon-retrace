@@ -1,0 +1,6 @@
+{
+  "_deprecated": true,
+  "_comment": "Superseded by silvergate_labs_entity.json -- Silvergate Aerospace turned out to be a Module 1 HELDOUT entity (zero paraphrase/qa/bio training examples: data_pipeline's train/heldout split holds out an entity's ENTIRE fact_group_id, and Silvergate Aerospace landed in heldout), so there is nothing genuine for the baseline to have learned about it and unlearning/data.py's heldout-entity guard rejects this request. Left in place (rather than deleted -- this device session cannot delete files without an explicit permission grant) so the mistake and its fix are both visible; use silvergate_labs_entity.json for the decoy-mention demo instead.",
+  "entity": null,
+  "attribute": null
+}

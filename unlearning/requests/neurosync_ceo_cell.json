@@ -1,0 +1,5 @@
+{
+  "entity": "NeuroSync Diagnostics",
+  "attribute": "ceo",
+  "_comment": "Attribute-cell demo (Design Doc Section 3(b)) -- forgets exactly 1 fact; the hardest boundary case, since the CEO fact lives in the same bio paragraph as NeuroSync's 4 retained facts (see unlearning/redact.py's bio redaction)."
+}

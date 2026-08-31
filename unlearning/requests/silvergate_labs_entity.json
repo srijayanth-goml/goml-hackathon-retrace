@@ -1,0 +1,4 @@
+{
+  "entity": "Silvergate Labs",
+  "_comment": "Entity-level demo for the decoy-mention check (review doc's replacement for the non-constructible VoltEdge Robotics example, see CLAUDE.md): verify the unrelated person whose current_company is the decoy 'Silvergate Therapeutics' is untouched post-erasure. Silvergate Labs (not Silvergate Aerospace, see silvergate_aerospace_entity.json's deprecation note) is a real TRAIN-split entity with 29 training examples of its own."
+}

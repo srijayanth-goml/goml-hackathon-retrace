@@ -1,0 +1,4 @@
+{
+  "attribute": "ceo",
+  "_comment": "Attribute-type demo (Design Doc Section 3(c)) -- forgets all 53 companies' CEO facts in one request, the largest single forget-set of the three (~10.6% of the whole KB)."
+}

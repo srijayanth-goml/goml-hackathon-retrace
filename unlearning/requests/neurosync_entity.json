@@ -1,0 +1,4 @@
+{
+  "entity": "NeuroSync Diagnostics",
+  "_comment": "Flagship entity-level demo (Design Doc Section 3(a)) -- same entity Module 2's retain-only reference model was built against, so this is the one request with a gold 'never saw it' comparison available."
+}

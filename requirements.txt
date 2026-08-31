@@ -1,7 +1,22 @@
-# Shared dependencies across ALL ReTrace modules. Keep this installable on a laptop
-# with no GPU and no ML stack -- module-specific heavy deps (torch, transformers,
-# peft, trl, bitsandbytes, unsloth, fastapi, etc.) belong in that module's own
-# requirements.txt (e.g. finetuning/requirements.txt, unlearning/requirements.txt),
-# not here.
+# Shared dependencies across ReTrace modules that run LOCALLY: data_pipeline,
+# unlearning (Module 3), verification (Module 4), and app/backend (Module 5) all run
+# on a laptop/local machine per ../CLAUDE.md's architecture decision -- only Module 2
+# (baseline fine-tuning) is Colab-only, so its EXTRA deps (trl, bitsandbytes,
+# datasets -- see finetuning/requirements.txt) stay in that module's own file rather
+# than here.
+#
+# torch/transformers/peft/accelerate/safetensors are included here (not in a separate
+# unlearning/requirements.txt) because Module 3 needs them to run locally at all --
+# consolidating into one root file is simpler than a per-module split for the modules
+# that all run on the same local machine (locked decision, see plan.md's Module 3
+# "Open decisions"). `pip install -r requirements.txt` from the repo root is enough
+# to run data_pipeline AND unlearning; only Colab needs the extra
+# finetuning/requirements.txt on top.
 pandas>=2.0
 pytest>=7.4
+torch>=2.1
+transformers>=4.44
+peft>=0.11
+accelerate>=0.33
+safetensors>=0.4
+sentencepiece>=0.2
