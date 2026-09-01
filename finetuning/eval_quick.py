@@ -2,17 +2,31 @@
 Module 2's post-training quick sanity check (plan.md step 6) -- NOT Module 4's full
 verification suite. This exists purely as a fast, cheap gate that answers "did this
 training run actually work" before spending more Colab time or handing off to
-Module 3: forward-direction QA accuracy against data/processed/heldout.jsonl
-(read-only, never trained on), overall and broken out by attribute.
+Module 3: forward-direction QA accuracy against data/processed/train.jsonl, overall
+and broken out by attribute.
 
-Expect the baseline (revision-0) to score high across the board. Expect the
-retain-only reference model to score at-or-near-chance specifically on the flagship
-demo entity's own held-out QA (it never saw those facts) while matching the baseline
-everywhere else -- that gap is itself informal evidence the retain-only training set
-was built correctly.
+BUG FIX (see RCA on the 2026-08-29 ~4%-accuracy reports): this used to score against
+data/processed/heldout.jsonl instead. data_pipeline/split.py holds heldout.jsonl out
+at the whole fact_group_id (entity) level and documents it as "reserved purely as an
+eval-time probe set for Module 4 and must never be trained on" -- so heldout.jsonl's
+20 entities were never part of ANY finetuning run, baseline or reference. Scoring
+against it measured zero-shot knowledge of fictional companies the model was never
+trained on, not whether fine-tuning worked, which is why accuracy came back near-zero
+regardless of training quality. debug_inspect_samples (below) already pulled its
+samples from train.jsonl for exactly this reason -- run_quick_eval just hadn't been
+made consistent with it.
+
+Scoring against train.jsonl instead also reproduces the comparison this module always
+intended: expect the baseline (revision-0) to score high across the board, since it
+trained on every record here. Expect the retain-only reference model to score
+at-or-near-chance specifically on the flagship demo entity's own forward QA (dropped
+from ITS training set by build_retain_only_records, but still present in train.jsonl
+as ground truth) while matching the baseline everywhere else -- summary's
+"flagship_entity_accuracy" surfaces that gap directly instead of it being averaged
+away inside accuracy_by_attribute.
 
 Only `run_quick_eval`'s generation step needs a real transformers model+tokenizer at
-call time; everything else here (loading heldout QA, looking up expected values)
+call time; everything else here (loading QA records, looking up expected values)
 needs only the repo-root requirements.txt.
 """
 from __future__ import annotations
@@ -32,8 +46,15 @@ def _fact_value_map() -> Dict[str, str]:
     return {r.fact_id: r.value for r in rows}
 
 
-def load_forward_qa_heldout() -> List[dict]:
-    records = list(read_jsonl(root_config.HELDOUT_JSONL_PATH))
+def load_forward_qa_train() -> List[dict]:
+    """Every forward-direction QA record from data/processed/train.jsonl -- the exact
+    facts a checkpoint was (baseline) or was deliberately not (reference model, only
+    for its own flagship-entity subset) trained on. Deliberately NOT
+    data/processed/heldout.jsonl: that file is Module 1's entity-level probe set
+    reserved for Module 4, and its entities were never part of any finetuning run --
+    scoring against it here always produces a near-chance number regardless of
+    training quality (see the module docstring's BUG FIX note)."""
+    records = list(read_jsonl(root_config.TRAIN_JSONL_PATH))
     return [
         r for r in records
         if r["metadata"]["source_type"] == "qa" and r["metadata"]["direction"] == "forward"
@@ -58,22 +79,27 @@ def generate_answer(model, tokenizer, user_message: str, max_new_tokens: int = 6
 
 def run_quick_eval(model, tokenizer, limit: "int | None" = None) -> Tuple[dict, List[dict]]:
     """Returns (summary, per_example_details). summary has overall_accuracy,
-    accuracy_by_attribute, and n; per_example_details records question/expected/got/
-    correct for every held-out forward-QA example, for manual spot-checking.
-    `limit` caps how many held-out examples are evaluated (useful for a quick local
-    CPU run)."""
+    accuracy_by_attribute, flagship_entity_accuracy/flagship_entity_n, and n;
+    per_example_details records question/expected/got/correct for every
+    train-set forward-QA example, for manual spot-checking. `limit` caps how many
+    examples are evaluated (useful for a quick local CPU run)."""
+    from finetuning import ft_config
+
     value_map = _fact_value_map()
-    records = load_forward_qa_heldout()
+    records = load_forward_qa_train()
     if limit is not None:
         records = records[:limit]
 
     correct_by_attr: Counter = Counter()
     total_by_attr: Counter = Counter()
+    flagship_correct = 0
+    flagship_total = 0
     details: List[dict] = []
 
     for r in records:
         fact_id = r["metadata"]["fact_ids"][0]
         attribute = r["metadata"]["attribute"]
+        entity = r["metadata"]["entity"]
         expected_value = value_map[fact_id]
         question = r["messages"][0]["content"]
 
@@ -84,9 +110,14 @@ def run_quick_eval(model, tokenizer, limit: "int | None" = None) -> Tuple[dict, 
         if is_correct:
             correct_by_attr[attribute] += 1
 
+        if entity == ft_config.FLAGSHIP_DEMO_ENTITY:
+            flagship_total += 1
+            if is_correct:
+                flagship_correct += 1
+
         details.append({
             "fact_id": fact_id,
-            "entity": r["metadata"]["entity"],
+            "entity": entity,
             "attribute": attribute,
             "question": question,
             "expected_value": expected_value,
@@ -104,6 +135,13 @@ def run_quick_eval(model, tokenizer, limit: "int | None" = None) -> Tuple[dict, 
         "n": n,
         "overall_accuracy": overall_accuracy,
         "accuracy_by_attribute": accuracy_by_attribute,
+        # Surfaces the forget/retain contrast run_quick_eval was always meant to show
+        # (see module docstring): should be high for the baseline checkpoint and
+        # near-chance for the retain-only reference model, without averaging the
+        # flagship entity's ~1-in-100 examples away inside accuracy_by_attribute.
+        "flagship_entity": ft_config.FLAGSHIP_DEMO_ENTITY,
+        "flagship_entity_n": flagship_total,
+        "flagship_entity_accuracy": (flagship_correct / flagship_total) if flagship_total else None,
     }
     return summary, details
 # --------------------------------------------------------------------------------

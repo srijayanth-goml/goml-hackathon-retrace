@@ -338,7 +338,8 @@ def run_reference(entity: Optional[str] = None, skip_quick_eval: bool = False) -
 
 def _run_quick_eval_on(adapter_dir: Path) -> dict:
     """Loads the base model + the just-trained adapter and runs eval_quick.py's
-    sanity-check pass against data/processed/heldout.jsonl (read-only). Kept optional
+    sanity-check pass against data/processed/train.jsonl (see finetuning/eval_quick.py's
+    module docstring for why train.jsonl, not heldout.jsonl). Kept optional
     (skip_quick_eval) so a quick code/data-prep smoke test doesn't have to also pay
     for a full generation pass over the held-out set.
 

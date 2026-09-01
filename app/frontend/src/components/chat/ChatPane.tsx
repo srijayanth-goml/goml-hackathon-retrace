@@ -18,10 +18,17 @@ interface ChatPaneProps {
 /**
  * One revision's conversation: message list + input, POST /chat
  * {revision, messages, max_new_tokens?}. Stateless per Module 5's design -- the
- * full transcript lives only in this component's own state and is resent in full
- * every turn (app/backend keeps no server-side session), so this pane surviving a
- * backend restart mid-demo is really "the browser tab kept the history", which is
- * worth knowing if a judge asks why refreshing the page clears the chat.
+ * full transcript lives only in this component's own state (so this pane surviving
+ * a backend restart mid-demo is really "the browser tab kept the history", worth
+ * knowing if a judge asks why refreshing the page clears the chat) -- but only the
+ * CURRENT question is sent to /chat, never the prior turns. Every finetuning/
+ * unlearning training record is a single isolated {user, assistant} pair (see
+ * data_pipeline/augment/*.py) -- no multi-turn example exists anywhere in the
+ * training data -- so resending accumulated history the way a normal chat client
+ * would put the model in a conversation shape it never saw a single example of,
+ * which measurably degraded answer quality (see the RCA on live-chat vs.
+ * finetuning/eval_quick.py's accuracy). Each turn is scored independently by the
+ * model, same as finetuning/eval_quick.py's own single-turn generate_answer.
  */
 export const ChatPane = forwardRef<ChatPaneHandle, ChatPaneProps>(function ChatPane({ revision, title }, ref) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -34,13 +41,17 @@ export const ChatPane = forwardRef<ChatPaneHandle, ChatPaneProps>(function ChatP
     const trimmed = text.trim();
     if (!trimmed || sending) return;
 
-    const nextMessages: ChatMessage[] = [...messages, { role: "user", content: trimmed }];
-    setMessages(nextMessages);
+    const userTurn: ChatMessage = { role: "user", content: trimmed };
+    setMessages((prev) => [...prev, userTurn]);
     setInput("");
     setSending(true);
     setError(null);
 
-    postChat({ revision, messages: nextMessages })
+    // Only this one turn goes to the model -- see the component docstring above for
+    // why: the adapter was never trained on multi-turn context, so sending the
+    // accumulated transcript (the "obvious" chat-client behavior) actively hurts
+    // answer quality rather than helping it.
+    postChat({ revision, messages: [userTurn] })
       .then((res) => {
         setMessages((prev) => [...prev, { role: "assistant", content: res.reply }]);
       })

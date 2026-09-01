@@ -11,6 +11,7 @@ installed in this environment).
 from __future__ import annotations
 
 import datetime
+import json
 import uuid
 
 from app.backend import jobs
@@ -128,6 +129,14 @@ def test_system_exit_from_missing_heavy_deps_fails_the_job_not_the_process(monke
     # installed -- a plain `except Exception` around this would let it escape and
     # kill the worker thread instead of just failing the one job. Caught for real by
     # this test before the fix.
+    #
+    # _patch_jobs_dir was missing here for a while -- every other test in this file
+    # calls it, but this one didn't, so running this suite wrote a real
+    # "simulated missing heavy deps" job straight into app/backend/jobs/jobs.json
+    # (the actual runtime file, not a tmp_path). Caught by finding exactly that
+    # string in a real jobs.json outside any test run.
+    _patch_jobs_dir(monkeypatch, tmp_path)
+
     def raises_system_exit(job):
         raise SystemExit("simulated missing heavy deps")
 
@@ -197,3 +206,78 @@ def test_submit_training_job_returns_an_independent_snapshot(monkeypatch, tmp_pa
     # the snapshot returned at submission time must be untouched by the later mutation
     assert snapshot["status"] == "queued"
     assert jobs.get_job(snapshot["job_id"])["status"] == "done"
+
+
+def test_load_persisted_reconciles_stale_running_jobs_on_startup(monkeypatch, tmp_path):
+    # Regression test for the real bug this class of scenario caused: a job
+    # persisted as "running" by a process that no longer exists (a crash, a
+    # Ctrl+C, an interrupted `pytest` run) must NOT stay "running" forever just
+    # because a new process loaded it from disk -- this process's worker thread
+    # always starts empty, so nothing could actually still be running it. Before
+    # the fix, _load_persisted() loaded such a record verbatim, and
+    # useActiveJob()-style "is anything active" checks (the real frontend's
+    # ErasureRequestForm included) would block every future submission forever.
+    _patch_jobs_dir(monkeypatch, tmp_path)
+
+    stale_job_id = str(uuid.uuid4())
+    stale_record = {
+        "job_id": stale_job_id,
+        "job_type": "train_and_verify",
+        "status": "running",
+        "erasure_request": {"entity": "NeuroSync Diagnostics", "attribute": None, "request_type": "entity"},
+        "method": "npo",
+        "parent_revision": None,
+        "max_steps": None,
+        "auto_verify": True,
+        "revision": None,
+        "error": None,
+        "created_at": "2026-01-01T00:00:00+00:00",
+        "started_at": "2026-01-01T00:00:01+00:00",
+        "finished_at": None,
+        "log_tail": [],
+    }
+    jobs.be_config.JOBS_JSON_PATH.write_text(json.dumps([stale_record]))
+
+    jobs._load_persisted()
+
+    result = jobs.get_job(stale_job_id)
+    assert result["status"] == "failed"
+    assert "restart" in result["error"] or "no longer running" in result["error"]
+    assert result["finished_at"] is not None
+
+    # The reconciliation must have been written back to disk too, not just held
+    # in memory -- a second process loading this same file should see "failed",
+    # not "running" again.
+    on_disk = json.loads(jobs.be_config.JOBS_JSON_PATH.read_text())
+    on_disk_record = next(r for r in on_disk if r["job_id"] == stale_job_id)
+    assert on_disk_record["status"] == "failed"
+
+
+def test_load_persisted_leaves_terminal_status_jobs_untouched(monkeypatch, tmp_path):
+    _patch_jobs_dir(monkeypatch, tmp_path)
+
+    done_job_id = str(uuid.uuid4())
+    done_record = {
+        "job_id": done_job_id,
+        "job_type": "verify_only",
+        "status": "done",
+        "erasure_request": None,
+        "method": None,
+        "parent_revision": None,
+        "max_steps": None,
+        "auto_verify": True,
+        "revision": 1,
+        "error": None,
+        "created_at": "2026-01-01T00:00:00+00:00",
+        "started_at": "2026-01-01T00:00:01+00:00",
+        "finished_at": "2026-01-01T00:00:02+00:00",
+        "log_tail": [],
+    }
+    jobs.be_config.JOBS_JSON_PATH.write_text(json.dumps([done_record]))
+
+    jobs._load_persisted()
+
+    result = jobs.get_job(done_job_id)
+    assert result["status"] == "done"
+    assert result["error"] is None
+    assert result["finished_at"] == "2026-01-01T00:00:02+00:00"

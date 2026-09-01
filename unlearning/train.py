@@ -27,6 +27,7 @@ from __future__ import annotations
 import argparse
 import json
 import random
+import time
 from pathlib import Path
 from typing import List, Optional
 
@@ -71,6 +72,33 @@ def _sample_general(records: List[dict], n: int, seed: int) -> List[dict]:
     return rng.sample(records, n)
 
 
+def _precompute_reference_logprobs(ref_model, tokenizer, forget_records: List[dict]) -> dict:
+    """Return frozen-reference sequence log-probabilities keyed by record identity.
+
+    NPO repeatedly samples from ``forget_records`` but never updates ``pi_ref``.
+    Reusing those log-probabilities is mathematically equivalent to recomputing
+    them on every step, and it removes one frozen-model forward pass from the
+    NPO hot path.  ``id(record)`` is intentional: the sampler yields the exact
+    dictionaries held in this in-memory list, and identity avoids serializing a
+    large metadata payload just to form a cache key.
+    """
+    from unlearning.npo import compute_batch_logps
+    import torch
+
+    cache = {}
+    ref_model.eval()
+    batch_size = ul_config.REFERENCE_LOGPROB_CACHE_BATCH_SIZE
+    with torch.inference_mode():
+        for offset in range(0, len(forget_records), batch_size):
+            records = forget_records[offset:offset + batch_size]
+            batch = model_io.pad_collate(
+                records, tokenizer, ft_config.MAX_SEQ_LENGTH, tokenizer.pad_token_id
+            )
+            values = compute_batch_logps(ref_model, batch).detach().cpu().tolist()
+            cache.update({id(record): value for record, value in zip(records, values)})
+    return cache
+
+
 def _pre_unlearning_baseline(theta_model, tokenizer, batches) -> dict:
     """Accuracy snapshot BEFORE any unlearning step -- what the early-stop-on-
     neighbor-drift rule compares every later snapshot against (Design Doc Section 6
@@ -102,7 +130,17 @@ def _should_early_stop(baseline: dict, current: dict) -> bool:
     return True
 
 
-def _train_step(method, theta_model, ref_model, tokenizer, forget_records, retain_records, beta, lambda_retain):
+def _train_step(
+    method,
+    theta_model,
+    ref_model,
+    tokenizer,
+    forget_records,
+    retain_records,
+    beta,
+    lambda_retain,
+    reference_logprob_cache=None,
+):
     from unlearning.npo import compute_batch_logps, npo_loss_tensor
     import torch
 
@@ -111,8 +149,18 @@ def _train_step(method, theta_model, ref_model, tokenizer, forget_records, retai
 
     if method == "npo":
         theta_forget_logps = compute_batch_logps(theta_model, forget_batch)
-        with torch.no_grad():
-            ref_forget_logps = compute_batch_logps(ref_model, forget_batch)
+        if reference_logprob_cache is None:
+            with torch.no_grad():
+                ref_forget_logps = compute_batch_logps(ref_model, forget_batch)
+        else:
+            missing = [r for r in forget_records if id(r) not in reference_logprob_cache]
+            if missing:
+                raise RuntimeError("reference log-probability cache is missing a sampled forget record")
+            ref_forget_logps = torch.tensor(
+                [reference_logprob_cache[id(r)] for r in forget_records],
+                device=theta_forget_logps.device,
+                dtype=theta_forget_logps.dtype,
+            )
         forget_loss = npo_loss_tensor(theta_forget_logps, ref_forget_logps, beta)
     elif method == "ga":
         from unlearning.gradient_ascent import ga_loss_tensor
@@ -140,6 +188,9 @@ def run(
     _require_heavy_deps()
     import torch
 
+    run_started = time.perf_counter()
+    runtime = {}
+
     parent_revision = ul_config.DEFAULT_PARENT_REVISION if parent_revision is None else parent_revision
     max_steps = ul_config.MAX_STEPS if max_steps is None else max_steps
 
@@ -153,9 +204,21 @@ def run(
     batches = build_unlearning_batches(request)
     print(f"[unlearning:{method}] {batches.summary()}")
 
+    model_load_started = time.perf_counter()
     theta_model, ref_model, tokenizer = model_io.load_ref_and_theta(adapter_dir, ul_config.MODEL_NAME, bf16=ft_config.BF16)
+    runtime["model_load_seconds"] = round(time.perf_counter() - model_load_started, 3)
 
+    reference_logprob_cache = None
+    cache_started = time.perf_counter()
+    if method == "npo" and ul_config.CACHE_REFERENCE_LOGPROBS:
+        reference_logprob_cache = _precompute_reference_logprobs(ref_model, tokenizer, batches.forget_train)
+    runtime["reference_cache_seconds"] = round(time.perf_counter() - cache_started, 3)
+    runtime["reference_cache_records"] = len(reference_logprob_cache or {})
+    runtime["reference_logprob_cache_enabled"] = reference_logprob_cache is not None
+
+    baseline_eval_started = time.perf_counter()
     accuracy_before = _pre_unlearning_baseline(theta_model, tokenizer, batches)
+    runtime["baseline_evaluation_seconds"] = round(time.perf_counter() - baseline_eval_started, 3)
     print(f"[unlearning:{method}] pre-unlearning accuracy: {accuracy_before}")
 
     rng = random.Random(ul_config.SEED)
@@ -170,6 +233,7 @@ def run(
     log_history: List[dict] = []
     early_stop_step: Optional[int] = None
     accuracy_after = accuracy_before
+    train_loop_started = time.perf_counter()
 
     for step in range(1, max_steps + 1):
         forget_batch_records = [next(forget_iter) for _ in range(ul_config.FORGET_BATCH_SIZE)]
@@ -180,7 +244,7 @@ def run(
 
         total_loss, forget_loss_val, retain_loss_val = _train_step(
             method, theta_model, ref_model, tokenizer, forget_batch_records, retain_batch_records,
-            ul_config.NPO_BETA, ul_config.LAMBDA_RETAIN,
+            ul_config.NPO_BETA, ul_config.LAMBDA_RETAIN, reference_logprob_cache,
         )
         optimizer.zero_grad()
         total_loss.backward()
@@ -199,17 +263,28 @@ def run(
                 print(f"[unlearning:{method}] early-stopping at step {step}: forget collapsed, neighbor/general flat")
                 break
 
+    runtime["optimization_seconds"] = round(time.perf_counter() - train_loop_started, 3)
+    runtime["optimization_steps"] = len(log_history)
+    runtime["optimization_seconds_per_step"] = round(
+        runtime["optimization_seconds"] / len(log_history), 3
+    ) if log_history else None
+
+    final_eval_started = time.perf_counter()
     if not skip_final_eval:
         theta_model.eval()
         accuracy_after = ev.track_all(
             theta_model, tokenizer, batches.forget_train, batches.retain_neighbor, batches.retain_general, batches.forget_probe
         )
+    runtime["final_evaluation_seconds"] = round(time.perf_counter() - final_eval_started, 3)
 
     revision = ul_manifest.next_revision_number()
     output_dir = ul_config.revision_checkpoint_dir(revision, method)
     output_dir.mkdir(parents=True, exist_ok=True)
+    save_started = time.perf_counter()
     theta_model.save_pretrained(str(output_dir))
     tokenizer.save_pretrained(str(output_dir))
+    runtime["checkpoint_save_seconds"] = round(time.perf_counter() - save_started, 3)
+    runtime["end_to_end_seconds"] = round(time.perf_counter() - run_started, 3)
 
     summary = batches.summary()
     dataset_info = {"train_jsonl_sha256": _train_jsonl_sha256(), **{k: v for k, v in summary.items() if k not in ("request", "entity_type")}}
@@ -229,7 +304,10 @@ def run(
         early_stop_step=early_stop_step,
     )
 
-    _write_report(revision, method, manifest_entry, summary, log_history, accuracy_before, accuracy_after, early_stop_step)
+    _write_report(
+        revision, method, manifest_entry, summary, log_history, accuracy_before,
+        accuracy_after, early_stop_step, runtime,
+    )
     print(f"[unlearning:{method}] adapter saved to {output_dir}, registered as revision-{revision}")
     return manifest_entry
 
@@ -246,7 +324,10 @@ def _train_jsonl_sha256() -> str:
     return sha256_of_file(root_config.TRAIN_JSONL_PATH)
 
 
-def _write_report(revision, method, manifest_entry, summary, log_history, accuracy_before, accuracy_after, early_stop_step) -> None:
+def _write_report(
+    revision, method, manifest_entry, summary, log_history, accuracy_before,
+    accuracy_after, early_stop_step, runtime,
+) -> None:
     ul_config.REPORTS_DIR.mkdir(parents=True, exist_ok=True)
     json_path = ul_config.REPORTS_DIR / f"revision-{revision}_{method}_report.json"
     md_path = ul_config.REPORTS_DIR / f"revision-{revision}_{method}_report.md"
@@ -261,6 +342,7 @@ def _write_report(revision, method, manifest_entry, summary, log_history, accura
         "accuracy_after": accuracy_after,
         "early_stop_step": early_stop_step,
         "training_args": manifest_entry["training_args"],
+        "runtime": runtime,
         "log_history": log_history,
     }
     json_path.write_text(json.dumps(report, indent=2))
@@ -278,6 +360,8 @@ def _write_report(revision, method, manifest_entry, summary, log_history, accura
         "```json", json.dumps(accuracy_before, indent=2), "```", "",
         "## Accuracy after unlearning", "",
         "```json", json.dumps(accuracy_after, indent=2), "```", "",
+        "## Runtime", "",
+        "```json", json.dumps(runtime, indent=2), "```", "",
     ]
     md_path.write_text("\n".join(lines) + "\n")
 

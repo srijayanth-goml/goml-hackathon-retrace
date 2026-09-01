@@ -20,9 +20,7 @@ data/processed/*.md
 # (a deterministic recomputation of the same CSV), these record the outcome of an
 # actual GPU training run that isn't guaranteed bit-for-bit reproducible, so they're
 # kept as real evidence of what was run rather than treated as disposable.
-finetuning/checkpoints/*
-!finetuning/checkpoints/.gitkeep
-!finetuning/checkpoints/README.md
+
 
 
 docs/*

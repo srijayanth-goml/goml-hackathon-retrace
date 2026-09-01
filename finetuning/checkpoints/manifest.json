@@ -1,0 +1,144 @@
+{
+  "revisions": [
+    {
+      "revision": 0,
+      "label": "baseline",
+      "parent_revision": null,
+      "erasure_request": null,
+      "adapter_path": "finetuning/checkpoints/revision-0-baseline",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "lora_config": {
+        "r": 16,
+        "lora_alpha": 32,
+        "lora_dropout": 0.05,
+        "target_modules": [
+          "q_proj",
+          "k_proj",
+          "v_proj",
+          "o_proj",
+          "gate_proj",
+          "up_proj",
+          "down_proj"
+        ],
+        "bias": "none",
+        "task_type": "CAUSAL_LM"
+      },
+      "training_args": {
+        "num_epochs": 3,
+        "per_device_batch_size": 4,
+        "grad_accumulation_steps": 4,
+        "effective_batch_size": 16,
+        "learning_rate": 0.0002,
+        "lr_scheduler_type": "cosine",
+        "warmup_ratio": 0.03,
+        "max_seq_length": 256,
+        "bf16": true,
+        "seed": 42
+      },
+      "dataset": {
+        "train_jsonl_sha256": "e73cabee17ea52823aa091d7826ea7c63d07146f35d152bc1aa898c0c8ed1cc2",
+        "num_train_examples": 2264,
+        "num_sft_train": 2043,
+        "num_sft_val": 221,
+        "token_length_stats": {
+          "n": 2264,
+          "p50": 2,
+          "p90": 2,
+          "p99": 2,
+          "max": 2
+        }
+      },
+      "eval_summary": {
+        "n": 100,
+        "overall_accuracy": 0.04,
+        "accuracy_by_attribute": {
+          "birth_city": 0.0,
+          "ceo": 0.0,
+          "current_company": 0.0,
+          "education": 0.0,
+          "flagship_product": 0.0,
+          "founded_year": 0.0,
+          "headquarters": 0.09090909090909091,
+          "industry": 0.09090909090909091,
+          "previous_company": 0.2222222222222222,
+          "role": 0.0
+        }
+      },
+      "created_at": "2026-08-29T15:18:07.805285+00:00"
+    }
+  ],
+  "reference_models": [
+    {
+      "entity": "NeuroSync Diagnostics",
+      "fact_group_id": "G001",
+      "adapter_path": "finetuning/checkpoints/reference-model-neurosync-diagnostics",
+      "excluded_example_counts_by_source_type": {
+        "paraphrase": 20,
+        "qa": 7,
+        "bio": 1,
+        "relational": 3
+      },
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "lora_config": {
+        "r": 16,
+        "lora_alpha": 32,
+        "lora_dropout": 0.05,
+        "target_modules": [
+          "q_proj",
+          "k_proj",
+          "v_proj",
+          "o_proj",
+          "gate_proj",
+          "up_proj",
+          "down_proj"
+        ],
+        "bias": "none",
+        "task_type": "CAUSAL_LM"
+      },
+      "training_args": {
+        "num_epochs": 3,
+        "per_device_batch_size": 4,
+        "grad_accumulation_steps": 4,
+        "effective_batch_size": 16,
+        "learning_rate": 0.0002,
+        "lr_scheduler_type": "cosine",
+        "warmup_ratio": 0.03,
+        "max_seq_length": 256,
+        "bf16": true,
+        "seed": 42
+      },
+      "dataset": {
+        "train_jsonl_sha256": "e73cabee17ea52823aa091d7826ea7c63d07146f35d152bc1aa898c0c8ed1cc2",
+        "excluded_fact_group_id": "G001",
+        "num_train_examples_before_filter": 2264,
+        "num_train_examples_after_filter": 2233,
+        "num_sft_train": 2012,
+        "num_sft_val": 221,
+        "token_length_stats": {
+          "n": 2233,
+          "p50": 2,
+          "p90": 2,
+          "p99": 2,
+          "max": 2
+        }
+      },
+      "eval_summary": {
+        "n": 100,
+        "overall_accuracy": 0.04,
+        "accuracy_by_attribute": {
+          "birth_city": 0.0,
+          "ceo": 0.0,
+          "current_company": 0.0,
+          "education": 0.0,
+          "flagship_product": 0.0,
+          "founded_year": 0.18181818181818182,
+          "headquarters": 0.0,
+          "industry": 0.0,
+          "previous_company": 0.1111111111111111,
+          "role": 0.1111111111111111
+        }
+      },
+      "created_at": "2026-08-29T16:09:08.383867+00:00"
+    }
+  ]
+}

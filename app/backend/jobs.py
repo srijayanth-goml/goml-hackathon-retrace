@@ -48,14 +48,42 @@ def _persist() -> None:
     be_config.JOBS_JSON_PATH.write_text(json.dumps(snapshot, indent=2))
 
 
+_STALE_STATUSES = ("queued", "running", "verifying")
+
+
 def _load_persisted() -> None:
-    if be_config.JOBS_JSON_PATH.exists():
-        try:
-            records = json.loads(be_config.JOBS_JSON_PATH.read_text())
-        except json.JSONDecodeError:
-            return  # corrupt job history is not worth crashing startup over
-        for r in records:
-            _jobs[r["job_id"]] = r
+    """Loads jobs.json into memory at import time, then reconciles anything left in
+    a non-terminal status (queued/running/verifying). This process's `_worker_loop`
+    ALWAYS starts empty -- there is no way for a job persisted as "running" to
+    actually still be running in a freshly-started process, since the only worker
+    that could have been running it lived in whatever process wrote that record and
+    is gone now (a killed/crashed server, a Ctrl+C'd `pytest` run, etc.). Without
+    this, a stale "running" record blocks every future submission forever (see
+    plan.md's Module 6 notes on this -- `useActiveJob()` correctly treats any
+    active-status job as blocking, so an un-reconciled stale one reads as "a job is
+    already running" when nothing actually is)."""
+    if not be_config.JOBS_JSON_PATH.exists():
+        return
+    try:
+        records = json.loads(be_config.JOBS_JSON_PATH.read_text())
+    except json.JSONDecodeError:
+        return  # corrupt job history is not worth crashing startup over
+    reconciled = False
+    for r in records:
+        stale_status = r.get("status")
+        if stale_status in _STALE_STATUSES:
+            r["status"] = "failed"
+            r["error"] = (
+                "no worker thread carried this job over a server restart -- it was "
+                f"left as {stale_status!r} by a process that is no longer running "
+                "(a crash, a Ctrl+C, or an interrupted test run). Submit the request "
+                "again if it still needs to run."
+            )
+            r["finished_at"] = _now_iso()
+            reconciled = True
+        _jobs[r["job_id"]] = r
+    if reconciled:
+        _persist()
 
 
 def _update(job_id: str, **fields) -> None:

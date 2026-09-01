@@ -71,6 +71,15 @@ FORGET_BATCH_SIZE = 4
 RETAIN_GENERAL_PER_FORGET = 4
 RETAIN_NEIGHBOR_PER_FORGET = 4
 
+# The NPO reference adapter is frozen and every forget record is drawn from a
+# small, fixed pool.  Its sequence log-probability is therefore invariant across
+# training steps (the reference model is always in eval mode).  Cache it once per
+# record instead of doing an otherwise identical reference forward pass at every
+# optimizer step.  This preserves the NPO objective while removing one of its
+# three model forwards from the hot path.
+CACHE_REFERENCE_LOGPROBS = True
+REFERENCE_LOGPROB_CACHE_BATCH_SIZE = FORGET_BATCH_SIZE
+
 # --- Training loop ---
 LEARNING_RATE = 1e-4
 MAX_STEPS = 300              # safety cap -- forget sets here are tiny (1 to 53 facts, Design Doc
@@ -108,6 +117,7 @@ def training_args_as_dict(method: str) -> dict:
         "forget_batch_size": FORGET_BATCH_SIZE,
         "retain_general_per_forget": RETAIN_GENERAL_PER_FORGET,
         "retain_neighbor_per_forget": RETAIN_NEIGHBOR_PER_FORGET,
+        "cache_reference_logprobs": CACHE_REFERENCE_LOGPROBS,
         "max_steps": MAX_STEPS,
         "eval_every_n_steps": EVAL_EVERY_N_STEPS,
         "seed": SEED,
