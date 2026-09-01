@@ -102,14 +102,18 @@ class ModelManager:
         model = get_peft_model(base, peft_config)
         return model
 
-    def load_adapter(self, adapter_path: str) -> PeftModel:
+    def load_adapter(self, adapter_path: str, is_trainable: bool = False) -> PeftModel:
         """
-        Loads an existing trained LoRA adapter checkpoint on top of the frozen base model.
+        Loads an existing LoRA adapter checkpoint on top of the frozen base model.
+
+        Inference and evaluation use the default non-trainable adapter. Slice
+        training must explicitly request a trainable adapter when resuming from
+        the preceding SISA checkpoint.
         """
         base = self.load_base_model()
         if not os.path.exists(adapter_path):
             raise FileNotFoundError(f"Adapter path does not exist: {adapter_path}")
-        model = PeftModel.from_pretrained(base, adapter_path, is_trainable=True)
+        model = PeftModel.from_pretrained(base, adapter_path, is_trainable=is_trainable)
         return model
 
     def generate(
@@ -117,7 +121,7 @@ class ModelManager:
         model: PreTrainedModel,
         prompt: str,
         max_new_tokens: int = 64,
-        temperature: float = 0.1,
+        temperature: float = 0.0,
         top_p: float = 0.9,
     ) -> str:
         """

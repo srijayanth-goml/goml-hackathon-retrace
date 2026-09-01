@@ -201,6 +201,33 @@ Reports are automatically saved to:
 - `outputs/reports/erasure_report.json`
 - `outputs/reports/erasure_report.md`
 
+### 7. Local inference UI and probe accuracy
+
+Install the dependencies with a Python 3.10-3.12 environment, then launch the local Gradio UI:
+
+```bash
+python3 -m pip install -r requirements.txt
+python3 app.py
+```
+
+The UI can query a trained or unlearned final adapter for a selected shard and run a reproducible factual probe check. Shard adapters are independent experts, so the correct shard must be selected manually.
+
+For a non-UI accuracy check:
+
+```bash
+python3 scripts/evaluate_accuracy.py --shard-id 1 --samples 50
+```
+
+This is **in-domain probe accuracy**, not held-out generalisation accuracy: the existing adapters were trained on every augmented record in their shard. The result is scored by whether the expected factual value is present in the response and includes per-probe output for review.
+
+The UI also provides an **Unlearn an entity** tab. It resolves the selected fact group to its shard and slice, displays the rollback/retraining scope, requires confirmation, and runs the same workflow as:
+
+```bash
+python3 scripts/unlearn_sisa.py --fact-group-id G056 --device mps
+```
+
+The UI is currently configured to use the Mac GPU through PyTorch MPS. An unlearning run preserves the original trained adapter but replaces the existing unlearned adapter for the affected shard.
+
 ---
 
 ## 9. Google Colab Execution

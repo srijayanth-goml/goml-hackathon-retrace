@@ -3,7 +3,7 @@ import time
 import json
 import torch
 from torch.utils.data import Dataset, DataLoader
-from typing import Dict, Any, List, Optional
+from typing import Callable, Dict, Any, List, Optional
 from transformers import PreTrainedTokenizer, get_cosine_schedule_with_warmup
 from .model import ModelManager
 
@@ -122,6 +122,7 @@ class SISATrainer:
         output_checkpoint_path: Optional[str] = None,
         epochs: Optional[int] = None,
         dry_run: bool = False,
+        epoch_progress_callback: Optional[Callable[[int, int], None]] = None,
     ) -> Dict[str, Any]:
         """
         Trains a single slice. If previous_checkpoint_path is provided, continues from it.
@@ -149,6 +150,8 @@ class SISATrainer:
                 json.dump(dummy_meta, f, indent=2)
             with open(os.path.join(output_checkpoint_path, "training_meta.json"), "w") as f:
                 json.dump(dummy_meta, f, indent=2)
+            if epoch_progress_callback:
+                epoch_progress_callback(1, 1)
             return {
                 "shard_id": shard_id,
                 "slice_id": slice_id,
@@ -163,7 +166,8 @@ class SISATrainer:
         # Load or initialize LoRA model
         if previous_checkpoint_path and os.path.exists(previous_checkpoint_path) and os.path.exists(os.path.join(previous_checkpoint_path, "adapter_model.safetensors")):
             print(f"[SISA] Loading previous checkpoint from: {previous_checkpoint_path}")
-            model = self.model_mgr.load_adapter(previous_checkpoint_path)
+            # A resumed slice must retain gradients for its LoRA weights.
+            model = self.model_mgr.load_adapter(previous_checkpoint_path, is_trainable=True)
         else:
             print(f"[SISA] Initializing fresh LoRA adapter for Shard {shard_id}...")
             model = self.model_mgr.create_lora_model(
@@ -233,6 +237,8 @@ class SISATrainer:
             avg_loss = epoch_loss / max(1, len(dataloader))
             final_loss = avg_loss
             print(f"  |-- Epoch {epoch}/{num_epochs} - Avg Loss: {avg_loss:.4f}")
+            if epoch_progress_callback:
+                epoch_progress_callback(epoch, num_epochs)
 
         # Save checkpoint
         print(f"[SISA] Saving slice checkpoint to: {output_checkpoint_path}")

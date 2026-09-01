@@ -1,7 +1,7 @@
 import os
 import time
 import json
-from typing import Dict, Any, Optional
+from typing import Callable, Dict, Any, Optional
 from .sharding import SISAShardManager
 from .model import ModelManager
 from .trainer import SISATrainer
@@ -35,11 +35,14 @@ class SISAUnlearner:
         target_group_id: str,
         epochs_per_slice: Optional[int] = None,
         dry_run: bool = False,
+        progress_callback: Optional[Callable[[float, str], None]] = None,
     ) -> Dict[str, Any]:
         """
         Executes rollback and retraining for target_group_id.
         """
         unlearn_start_time = time.time()
+        if progress_callback:
+            progress_callback(0.02, "Looking up the target group and rollback checkpoint")
 
         # 1. Locate target group in shards metadata
         metadata = SISAShardManager.load_metadata(self.shards_dir)
@@ -100,7 +103,8 @@ class SISAUnlearner:
         total_retrained_examples = 0
 
         # Iterate from target_slice_id to num_slices
-        for slice_id in range(target_slice_id, num_slices + 1):
+        retrained_slices_total = num_slices - target_slice_id + 1
+        for retrained_slice_index, slice_id in enumerate(range(target_slice_id, num_slices + 1), start=1):
             slice_file = os.path.join(self.shards_dir, f"shard_{shard_id}", f"slice_{slice_id}.jsonl")
             
             # Read and filter records
@@ -115,6 +119,21 @@ class SISAUnlearner:
             total_retrained_examples += len(slice_records)
             out_ckpt = os.path.join(unlearned_shard_dir, f"slice_{slice_id}")
 
+            if progress_callback:
+                progress_callback(
+                    0.05 + 0.9 * ((retrained_slice_index - 1) / retrained_slices_total),
+                    f"Retraining shard {shard_id}, slice {slice_id} ({len(slice_records)} examples)",
+                )
+
+            def report_epoch_progress(completed_epochs: int, total_epochs: int) -> None:
+                if not progress_callback:
+                    return
+                completed_slice_fraction = (retrained_slice_index - 1 + (completed_epochs / total_epochs)) / retrained_slices_total
+                progress_callback(
+                    0.05 + 0.9 * completed_slice_fraction,
+                    f"Retraining shard {shard_id}, slice {slice_id}: epoch {completed_epochs}/{total_epochs}",
+                )
+
             print(f"\n[Unlearning] Retraining Shard {shard_id} Slice {slice_id} ({len(slice_records)} active examples)...")
 
             res = trainer.train_slice(
@@ -125,6 +144,7 @@ class SISAUnlearner:
                 output_checkpoint_path=out_ckpt,
                 epochs=epochs_per_slice,
                 dry_run=dry_run,
+                epoch_progress_callback=report_epoch_progress,
             )
             retrained_slice_summaries[slice_id] = res
             prev_ckpt = out_ckpt
@@ -134,6 +154,8 @@ class SISAUnlearner:
         os.makedirs(final_adapter_dir, exist_ok=True)
 
         if not dry_run and prev_ckpt:
+            if progress_callback:
+                progress_callback(0.97, "Saving the final unlearned adapter")
             final_model = self.model_mgr.load_adapter(prev_ckpt)
             final_model.save_pretrained(final_adapter_dir)
 
@@ -164,6 +186,8 @@ class SISAUnlearner:
         log_path = os.path.join(unlearned_shard_dir, f"unlearn_{target_group_id}_meta.json")
         with open(log_path, "w", encoding="utf-8") as f:
             json.dump(unlearn_record, f, indent=2)
+        if progress_callback:
+            progress_callback(1.0, "Unlearning complete")
 
         print(f"\n=======================================================")
         print(f"  Unlearning Complete for {target_group_id} ({target_entity})")
